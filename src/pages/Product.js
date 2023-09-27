@@ -71,31 +71,37 @@ const Product = () => {
         AlertState = {State.CurrentAlert}
         >
         </FormAlert>
-        <Typography variant="h6" component="div">
+        <Typography variant="h3" component="div" gutterBottom>
           {product.title}
         </Typography>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+        <Typography variant="h5" color="text.secondary" gutterBottom>
           {product.id}
         </Typography>
-        <Typography variant="body2">
+        <Typography variant="h5" gutterBottom>
           {product.description}
         </Typography>
-        <Typography color="text.secondary">
+        <Typography color="text.secondary" variant="h5">
           ${product.price}
         </Typography>
-        <Link 
-            className="edit-link"
-            to={"/edit-product/" + product.id}
+        <Box display="flex" justifyContent="space-between" marginTop={5}>
+          <Button
+          component={Link} 
+          to={"/edit-product/" + product.id} 
+          variant="contained" 
+          color="primary"
+          sx={{marginRight:2}}
         >
-            Edit
-        </Link>
+          Edit
+        </Button>
         <Button 
             onClick={deleteProduct}
             size="sm" 
-            variant="danger"
+            variant="contained"
+            color="error"
         >
             Delete
         </Button>
+        </Box>
         </Box>
       </Container>
     );
