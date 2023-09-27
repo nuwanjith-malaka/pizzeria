@@ -15,7 +15,8 @@ phases:
       - npm run build
   post_build:
     commands:
-      - aws s3 cp --cache-control="max-age=0, no-cache, no-store, must-revalidate" ./build/index.html s3://malaka-tutorial-bucket/pizzeriaCodeBuildProject/build/
+      - aws s3 cp --recursive  ./build s3://malaka-tutorial-bucket/
+      - aws s3 cp --cache-control="max-age=0, no-cache, no-store, must-revalidate" ./build/index.html s3://malaka-tutorial-bucket/
       - aws cloudfront create-invalidation --distribution-id EGD9VX3F6ZDWF --paths /index.html
 artifacts:
   files:
