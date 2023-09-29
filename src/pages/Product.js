@@ -78,7 +78,7 @@ const Product = () => {
           {product.id}
         </Typography>
         <Typography variant="h5" gutterBottom>
-          {product.description}.
+          {product.description}...
         </Typography>
         <Typography color="text.secondary" variant="h5">
           ${product.price}
