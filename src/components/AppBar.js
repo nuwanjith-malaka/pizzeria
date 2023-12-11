@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
 
 // start -> MUI dark and light mode toggling
 import { useTheme } from '@mui/material/styles';
@@ -69,12 +70,7 @@ function ResponsiveAppBar() {
             component="img"
             sx={{ height: 25,
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none', }}
+              display: { xs: 'none', md: 'flex' } }}
             alt="Logo"
             src={"https://malakas3.s3.amazonaws.com/pizzeria/logo/pizzeria-black.png"}
           />
@@ -122,25 +118,30 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component={RouterLink} 
-            to="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
+          <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+            sx={{ minHeight: '10vh' }}
+            display= {{ xs: 'flex', md: 'none' }}
           >
-            logo
-          </Typography>
+            <Grid item xs={3}>
+            <Link href="/">
+            <Box
+              component="img"
+              sx={{
+                height: 25,
+                display: { xs: 'flex', md: 'none' },
+                flexGrow: 1
+              }}
+              alt="Logo"
+              src={"https://malakas3.s3.amazonaws.com/pizzeria/logo/pizzeria-black.png"}
+            />
+        </Link>
+            </Grid>
+          </Grid>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button 
