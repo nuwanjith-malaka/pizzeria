@@ -4,9 +4,14 @@ import Layout from "./Layout";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import Product from "./pages/Product";
-import CreateProduct from "./pages/CreateProduct";
-import UpdateProduct from "./components/UpdateProduct";
+import Pizza from "./pages/Pizza";
+import Extra from "./pages/Extra";
+import ListPizza from "./pages/ListPizza";
+import ListExtra from "./pages/ListExtra";
+import CreatePizza from "./pages/CreatePizza";
+import CreateExtra from "./pages/CreateExtra";
+import UpdatePizza from "./components/UpdatePizza";
+import UpdateExtra from "./components/UpdateExtra";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as React from 'react';
 // start -> MUI with react-router
@@ -65,9 +70,16 @@ export default function App() {
                         <Route index element={<Home />} />
                         <Route path="SignIn" element={<SignIn />} />
                         <Route path="SignUp" element={<SignUp />} />
-                        <Route path="Create Product" element={<CreateProduct />} />
-                        <Route path="edit-product/:id" element={<UpdateProduct />} />
-                        <Route path="product/:id" element={<Product />} />
+                        <Route path="Pizza" element={<ListPizza />} />
+                        <Route path="Extra" element={<ListExtra />} />
+                        <Route path="Create Pizza" element={<CreatePizza />} />
+                        <Route path="Create Extra" element={<CreateExtra />} />
+                        <Route path="edit-pizza/:pk" element={<UpdatePizza />} />
+                        <Route path="edit-extra/:pk" element={<UpdateExtra />} />
+                        <Route path="pizza/pizza/:pk" element={<Pizza />} />
+                        <Route path="extra/extra/:pk" element={<Extra />} />
+                        <Route path="pizza/:pk" element={<Pizza />} />
+                        <Route path="extra/:pk" element={<Extra />} />
                     </Route>
                 </Routes>
             </Router>

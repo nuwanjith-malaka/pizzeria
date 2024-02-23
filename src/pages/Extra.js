@@ -14,7 +14,7 @@ import { Context } from '../Context'
 
 import FormAlert from "../components/FormAlert";
 
-const Product = () => {
+const Extra = () => {
 
     const { State, setState } = useContext(Context)
 
@@ -24,26 +24,26 @@ const Product = () => {
 
     const navigate = useNavigate();
 
-    const product = State.CurrentProduct
+    const Extra = State.CurrentExtra
 
-    const deleteProduct = () => {
-
+    const deleteExtra = () => {
+        console.log("starting deleteExtra method ->" , Extra)
         axios
-        .delete(`https://s1fc10ik12.execute-api.us-east-1.amazonaws.com/stage1/products/${product.id}`)
+        .delete("https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/extra", {params: {type:"item", item:"extra", pk:`${Extra.pk}`, sk:`${Extra.sk}`}})
         .then((res) => {
-            console.log(res)
+            console.log("printing delete request response", res)
             setState(
                 {...State ,
                   CurrentAlert:{ 
                     ...State.CurrentAlert,
                       open: true, 
                       type: 'success', 
-                      content: res.data 
+                      content: res.data.msg 
             }});
-            navigate('/');
+            navigate('/Extra');
         })
         .catch(err => {
-            console.log(err)
+            console.log('catching delete request error', JSON.stringify(err, null, " "))
             setState(
                 {...State ,
                   CurrentAlert:{ 
@@ -72,21 +72,35 @@ const Product = () => {
         >
         </FormAlert>
         <Typography variant="h3" component="div" gutterBottom>
-          {product.title}
+          {Extra.name}
         </Typography>
+        <Link href="/">
+          <Box
+            component="img"
+            max-width="100%" 
+            height="100%" 
+            padding="0" 
+            margin="0" 
+            alt="Logo"
+            src={Extra.image}
+          />
+        </Link>
         <Typography variant="h5" color="text.secondary" gutterBottom>
-          {product.id}
+          {Extra.pk}
         </Typography>
         <Typography variant="h5" gutterBottom>
-          {product.description}...
+          {Extra.description}
+        </Typography>
+        <Typography variant="h5" gutterBottom>
+          Starting from 
         </Typography>
         <Typography color="text.secondary" variant="h5">
-          ${product.price}
+          ${Extra["starting price"]}
         </Typography>
         <Box display="flex" justifyContent="space-between" marginTop={5}>
           <Button
           component={Link} 
-          to={"/edit-product/" + product.id} 
+          to={"/edit-Extra/" + Extra.pk} 
           variant="contained" 
           color="primary"
           sx={{marginRight:2}}
@@ -94,7 +108,7 @@ const Product = () => {
           Edit
         </Button>
         <Button 
-            onClick={deleteProduct}
+            onClick={deleteExtra}
             size="sm" 
             variant="contained"
             color="error"
@@ -107,4 +121,4 @@ const Product = () => {
     );
 };
 
-export default Product;
+export default Extra;

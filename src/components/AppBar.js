@@ -31,7 +31,7 @@ import { StaticRouter } from 'react-router-dom/server';
 
 // end -> MUI with react-router
 
-const pages = ['Create Product', 'SignIn',];
+const pages = ['Pizza', 'Extra', 'Create Pizza', 'Create Extra', 'SignIn',];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {

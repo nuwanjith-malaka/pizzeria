@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 
-import ProductCard from "./ProductCard";
+import ExtraCard from "../components/ExtraCard";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -17,14 +17,15 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 
-const ProductList = () => {
-const [Products, setProducts] = useState([]);
+const ExtraList = () => {
+const [Extras, setExtras] = useState([]);
 
 useEffect(() => {
+    console.log('sending axios get request')
 	axios
-	.get('https://s1fc10ik12.execute-api.us-east-1.amazonaws.com/stage1/products')
+	.get('https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/extra?type=list&item=extra')
 	.then(({ data }) => {
-		setProducts(data.Items);
+		setExtras(data.content.Items);
         console.log(data)
 	})
 	.catch((error) => {
@@ -33,10 +34,10 @@ useEffect(() => {
 }, []);
 
 const Data = () => {
-	return Products.map((res, i) => {
+	return Extras.map((res, i) => {
 	    return (
-            <Grid item xs={12} sm={6} md={4} lg={3} key ={i}>
-                <Item component={Card} variant="outlined"><ProductCard  product={res}  /></Item>
+            <Grid  item xs={12} sm={6} md={4} lg={3} key ={i}>
+                <Item  component={Card} variant="outlined"><ExtraCard  Extra={res}  /></Item>
             </Grid>
         )   
 	});
@@ -44,9 +45,9 @@ const Data = () => {
 
 return (
     <>
-    <Box sx={{mb:'30px'}}>
-        <Typography variant="h4" component="div">
-            Product List
+    <Box >
+        <Typography sx={{marginBottom:5}} variant="h4" component="div">
+            Extras
         </Typography>
     </Box>
     
@@ -61,4 +62,4 @@ return (
 );
 };
 
-export default ProductList;
+export default ExtraList;

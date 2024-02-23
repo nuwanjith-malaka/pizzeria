@@ -19,7 +19,7 @@ const bull = (
   </Box>
 );
 
-export default function ProductCard({product}) {
+export default function ExtraCard({Extra}) {
 
   const { State, setState } = useContext(Context)
   
@@ -27,19 +27,28 @@ export default function ProductCard({product}) {
 
   return (
     <>
-      <CardContent>
+      <CardContent >
+        <Link href="/">
+          <Box
+            component="img"
+            max-width="100%" 
+            height="200px" 
+            padding="0%" 
+            margin="0%" 
+            alt="Logo"
+            alignItems="center"
+            justify="center"
+            src={Extra.image}
+          />
+        </Link>
         <Typography variant="h6" component="div">
-          {product.title}
+          {Extra.name}
         </Typography>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          {product.id}
+          {Extra.pk}
         </Typography>
-        <Typography variant="body2">
-          {product.description}
-        </Typography>
-        <Typography color="text.secondary">
-          ${product.price}
-        </Typography>
+        <Typography marginTop="10px" color="text.secondary">starting from</Typography>
+        <Typography >${Extra["starting price"]}</Typography>
       </CardContent>
       <CardActions>
         <Button 
@@ -47,9 +56,9 @@ export default function ProductCard({product}) {
           onClick={() => {
             setState({
               ...State,
-                CurrentProduct: product
+                CurrentExtra: Extra
             })
-            navigate('product/:' + product.id);
+            navigate('Extra/:' + Extra.pk);
           }}>See More</Button>
       </CardActions>
     
