@@ -151,7 +151,7 @@ const CreatePizza = () => {
 	
 // Return Pizza form
 return(
-	<Container component="main" maxWidth="xs">
+	<Container maxWidth="xs">
 			<Typography component="h4" variant="h4" sx={{mb: 2, textAlign:'center'}}>
 				Create Pizza
 			</Typography>

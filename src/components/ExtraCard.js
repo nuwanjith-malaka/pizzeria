@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {Link, Routes, Route, useNavigate} from 'react-router-dom';
@@ -27,20 +28,13 @@ export default function ExtraCard({Extra}) {
 
   return (
     <>
+    <CardMedia
+        component="img"
+        height="200px"
+        image={Extra.image}
+        alt="Extra Image"
+      />
       <CardContent >
-        <Link href="/">
-          <Box
-            component="img"
-            max-width="100%" 
-            height="200px" 
-            padding="0%" 
-            margin="0%" 
-            alt="Logo"
-            alignItems="center"
-            justify="center"
-            src={Extra.image}
-          />
-        </Link>
         <Typography variant="h6" component="div">
           {Extra.name}
         </Typography>

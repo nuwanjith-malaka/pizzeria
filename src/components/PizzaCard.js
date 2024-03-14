@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {Link, Routes, Route, useNavigate} from 'react-router-dom';
@@ -27,30 +28,28 @@ export default function PizzaCard({Pizza}) {
   
   return (
     <>
+      <CardMedia
+        component="img"
+        height="200px"
+        image={Pizza.image}
+        alt="Pizza Image"
+      />
       <CardContent>
-        <Link href="/">
-          <Box
-            component="img"
-            max-width="100%" 
-            height="200px" 
-            padding="0" 
-            margin="0" 
-            alt="Logo"
-            src={Pizza.image}
-          />
-        </Link>
-        <Typography variant="h6" component="div">
+        <Box sx={{height:'100px'}}>
+          <Typography variant="h6" >
           {Pizza.name}
         </Typography>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+        </Box>
+        <Box>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           {Pizza.pk}
         </Typography>
         <Typography variant="body2">
-          {Pizza.description}
+          {Pizza.description.slice(0, 45)}
         </Typography>
         <Typography marginTop="10px" color="text.secondary">starting from</Typography>
         <Typography >${Pizza["starting price"]}</Typography>
-
+        </Box>
       </CardContent>
       <CardActions>
         <Button 

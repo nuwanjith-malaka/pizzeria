@@ -56,22 +56,13 @@ const Extra = () => {
     };
 
     return (
-        <Container>
-        <CssBaseline/>
-        <Box
-          sx={{
-            marginTop: 5,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
+      <Box sx={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
         <FormAlert
         handleClose = {alertHandleClose}
         AlertState = {State.CurrentAlert}
         >
         </FormAlert>
-        <Typography variant="h3" component="div" gutterBottom>
+        <Typography variant="h4" component="div" gutterBottom>
           {Extra.name}
         </Typography>
         <Link href="/">
@@ -117,7 +108,6 @@ const Extra = () => {
         </Button>
         </Box>
         </Box>
-      </Container>
     );
 };
 

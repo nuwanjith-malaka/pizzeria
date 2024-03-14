@@ -159,42 +159,13 @@ const EditPizza = (props) => {
 		},
 	});
 
-// Load data from server and reinitialize Pizza form
-// useEffect(() => {
-// 	axios
-// 	.get(
-// 		'https://s1fc10ik12.execute-api.us-east-1.amazonaws.com/stage1/Pizzas'
-// 		+ props.match.params.id
-// 	)
-// 	.then((res) => {
-// 		const { id, description, price, title } = res.data;
-// 		formik.initialValues = {
-// 			id: id,
-// 			description: description,
-// 			price: price,
-// 			title: title,
-// 		}
-// 	})
-// 	.catch((err) => console.log(err));
-// }, []);
-
-// Return Pizza form
 return (
 	<Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 5,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
 			<FormAlert
 				handleClose = {alertHandleClose}
 				AlertState = {State.CurrentAlert}
 			></FormAlert>
-			<Typography component="h1" variant="h5">
+			<Typography component="h4" variant="h4" sx={{mb: 2, textAlign:'center'}}>
 				Edit Pizza
 			</Typography>
 			<PizzaForm 
@@ -202,7 +173,6 @@ return (
 			>
 				Edit Pizza
 			</PizzaForm>
-		</Box>
     </Container>
 );
 };

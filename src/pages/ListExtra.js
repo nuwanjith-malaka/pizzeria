@@ -9,6 +9,9 @@ import Card from '@mui/material/Card';
 
 import ExtraCard from "../components/ExtraCard";
 
+import { useContext } from 'react'
+import { Context } from '../Context'
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -18,48 +21,40 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const ExtraList = () => {
-const [Extras, setExtras] = useState([]);
+    const { State, setState } = useContext(Context)
+    const extras = State.Extras
 
-useEffect(() => {
-    console.log('sending axios get request')
-	axios
-	.get('https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/extra?type=list&item=extra')
-	.then(({ data }) => {
-		setExtras(data.content.Items);
-        console.log(data)
-	})
-	.catch((error) => {
-		console.log(error);
-	});
-}, []);
+    useEffect(() => {
+        
+    }, []);
 
-const Data = () => {
-	return Extras.map((res, i) => {
-	    return (
-            <Grid  item xs={12} sm={6} md={4} lg={3} key ={i}>
-                <Item  component={Card} variant="outlined"><ExtraCard  Extra={res}  /></Item>
+    const Data = () => {
+        return extras.map((res, i) => {
+            return (
+                <Grid  item xs={12} sm={6} md={4} lg={3} key ={i}>
+                    <Item  component={Card} variant="outlined"><ExtraCard  Extra={res}  /></Item>
+                </Grid>
+            )   
+        });
+    };
+
+    return (
+        <>
+        <Box >
+            <Typography sx={{marginBottom:3, textAlign: 'center'}} variant="h4" component="div">
+                Extras
+            </Typography>
+        </Box>
+        
+        <Box sx={{ flexGrow: 1 }}>
+            <Grid container spacing={2} >
+                {Data()}
             </Grid>
-        )   
-	});
-};
+        </Box>
+        </>
+        
 
-return (
-    <>
-    <Box >
-        <Typography sx={{marginBottom:5}} variant="h4" component="div">
-            Extras
-        </Typography>
-    </Box>
-    
-    <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2} >
-            {Data()}
-        </Grid>
-    </Box>
-    </>
-    
-
-);
+    );
 };
 
 export default ExtraList;

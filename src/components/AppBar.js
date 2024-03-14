@@ -29,6 +29,7 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink, MemoryRouter } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 
+import MenuDrawer from './MenuDrawer';
 // end -> MUI with react-router
 
 const pages = ['Pizza', 'Extra', 'Create Pizza', 'Create Extra', 'SignIn',];
@@ -47,12 +48,13 @@ function ResponsiveAppBar() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseUserMenu = () => {
@@ -61,7 +63,7 @@ function ResponsiveAppBar() {
   
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Container maxWidth="xl">
       <CssBaseline />
         <Toolbar disableGutters>
@@ -76,47 +78,7 @@ function ResponsiveAppBar() {
           />
         </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography 
-                    sx={theme.palette.mode === 'dark' ? { textDecoration: "none" , color:'white'}:{ textDecoration: "none" }}
-                    textAlign="center" 
-                    component={RouterLink} 
-                    to={ "/" + page }
-                  >
-                    {page}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+            <MenuDrawer pages={pages}></MenuDrawer>
           </Box>
           <Grid
             container
@@ -139,7 +101,7 @@ function ResponsiveAppBar() {
               alt="Logo"
               src={"https://malakas3.s3.amazonaws.com/pizzeria/logo/pizzeria-black.png"}
             />
-        </Link>
+          </Link>
             </Grid>
           </Grid>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>

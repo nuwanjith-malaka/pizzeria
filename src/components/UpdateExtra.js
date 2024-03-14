@@ -166,20 +166,11 @@ const EditExtra = (props) => {
 // Return Extra form
 return (
 	<Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 5,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
 			<FormAlert
 				handleClose = {alertHandleClose}
 				AlertState = {State.CurrentAlert}
 			></FormAlert>
-			<Typography component="h1" variant="h5">
+			<Typography component="h4" variant="h4" sx={{mb: 2, textAlign:'center'}}>
 				Edit Extra
 			</Typography>
 			<ExtraForm 
@@ -187,7 +178,6 @@ return (
 			>
 				Edit Extra
 			</ExtraForm>
-		</Box>
     </Container>
 );
 };
