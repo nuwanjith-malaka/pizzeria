@@ -29,6 +29,7 @@ import { useContext } from 'react'
 import { Context } from '../Context'
 
 import FormAlert from "../components/FormAlert";
+import Cart from "../components/Cart";
 
 const Pizza = () => {
 
@@ -123,9 +124,11 @@ const Pizza = () => {
       <Grid
       container
       spacing={2}
+      direction="row"
+      sx={{marginTop:1}}
       >
         <Grid 
-          item xs={12} sm={12} md={4} lg={4}
+          item xs={12} sm={12} md={3} lg={3}
           sx={{
             border:'1px solid',
             justifyContent:'center', 
@@ -182,7 +185,7 @@ const Pizza = () => {
             </Button>
             </Box>
         </Grid>
-        <Grid sx={{border:'1px solid'}} item xs={12} sm={12} md={8} lg={8} >
+        <Grid sx={{border:'1px solid'}} item xs={12} sm={12} md={6} lg={6} >
               <Accordion>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
@@ -376,6 +379,16 @@ const Pizza = () => {
                 Add to Cart Rs. 2000.00
               </Button>  
             </Box>
+        </Grid>
+        <Grid 
+          item xs={12} sm={12} md={3} lg={3}
+          sx={{
+            border:'1px solid',
+          }} 
+        >
+          <Cart 
+            cartItems={State.CartItems}
+          ></Cart>
         </Grid>
     </Grid>
       

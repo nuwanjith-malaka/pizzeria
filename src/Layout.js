@@ -4,12 +4,11 @@ import AppBar from "./components/AppBar";
 import Footer from "./components/Footer";
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
 
 import { Context } from "./Context";
 
 import FormAlert from "./components/FormAlert";
-import Cart from "./components/Cart";
+
 
 const Layout = () => {
 
@@ -23,7 +22,8 @@ const Layout = () => {
             type: '',
             content : ''
         },
-        CartItems: []
+        CartItems: [],
+        User:{}
 	}); 
 
     const alertHandleClose = () => {
@@ -46,21 +46,7 @@ const Layout = () => {
       AlertState = {State.CurrentAlert}
     >
     </FormAlert>
-    <Grid
-      container
-      spacing={2}
-      direction="row"
-      sx={{marginTop:1}}
-    >
-      <Grid sx={{border:'1px solid'}} item xs={12} sm={12} md={8} lg={9}>
-        <Outlet />
-      </Grid>
-      <Grid id='cart' sx={{border:'1px solid'}} item xs={0} sm={0} md={4} lg={3} >
-          <Cart 
-            cartItems={State.CartItems}
-          ></Cart>
-      </Grid>
-    </Grid>
+    <Outlet />
     <Footer />
     </Container>
  </Context.Provider>

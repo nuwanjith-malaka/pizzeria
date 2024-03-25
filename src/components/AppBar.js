@@ -14,12 +14,13 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 // start -> MUI dark and light mode toggling
-import { useTheme } from '@mui/material/styles';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
-import {ColorModeContext} from '../index'
+// import { useTheme } from '@mui/material/styles';
+// import Brightness4Icon from '@mui/icons-material/Brightness4';
+// import Brightness7Icon from '@mui/icons-material/Brightness7';
+// import {ColorModeContext} from '../index'
 // end -> MUI dark and light mode toggling
 
 import CssBaseline from '@mui/material/CssBaseline';
@@ -32,14 +33,18 @@ import { StaticRouter } from 'react-router-dom/server';
 import MenuDrawer from './MenuDrawer';
 // end -> MUI with react-router
 
-const pages = ['Pizza', 'Extra', 'Create Pizza', 'Create Extra', 'SignIn',];
+  import { useContext } from 'react'
+import { Context } from '../Context'
+
+const pages = ['Pizza', 'Extra', 'Create Pizza', 'Create Extra'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
+  const { State, setState } = useContext(Context)
 
   // start -> MUI dark and light mode toggling
-  const theme = useTheme();
-  const colorMode = React.useContext(ColorModeContext);
+  // const theme = useTheme();
+  // const colorMode = React.useContext(ColorModeContext);
   // end -> MUI dark and light mode toggling
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -117,41 +122,61 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          <Box sx={{ flexGrow: 0 }}>
+            {
+              (Object.keys(State.User).length !== 0) 
+                ?
+                  <Box sx={{ flexGrow: 0 }}>
+                    <Tooltip title="Open settings">
+                      <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                        <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                      </IconButton>
+                    </Tooltip>
+                    <Menu
+                      sx={{ mt: '45px' }}
+                      id="menu-appbar"
+                      anchorEl={anchorElUser}
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      keepMounted
+                      transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                      open={Boolean(anchorElUser)}
+                      onClose={handleCloseUserMenu}
+                    >
+                      {settings.map((setting) => (
+                        <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                          <Typography textAlign="center">{setting}</Typography>
+                        </MenuItem>
+                      ))}
+                    </Menu>
+                  </Box>
+                :
+                  <Button 
+                    component={RouterLink} 
+                    to={ "/SignIn" }
+                    key={'SignIn'}
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: 'white', display: 'block' }}
+                  >
+                    {'SignIn'}
+                  </Button>     
+            }
+          
+          {/* <Box sx={{ flexGrow: 0 }}>
             <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
               {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>
-          </Box>
+          </Box> */}
+            <IconButton 
+              sx={{marginLeft:'1%'}} 
+              component={RouterLink} 
+              to={ "/CheckOut"}>
+              <ShoppingCartIcon></ShoppingCartIcon>
+            </IconButton>
         </Toolbar>
       </Container>
     </AppBar>

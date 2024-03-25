@@ -10,16 +10,19 @@ import ListPizza from "./pages/ListPizza";
 import ListExtra from "./pages/ListExtra";
 import CreatePizza from "./pages/CreatePizza";
 import CreateExtra from "./pages/CreateExtra";
+import CheckOut from "./pages/CheckOut";
+import OrderDetails from "./pages/OrderDetails";
+import OrderSuccess from "./pages/OrderSuccess";
 import UpdatePizza from "./components/UpdatePizza";
 import UpdateExtra from "./components/UpdateExtra";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+// import { createTheme, ThemeProvider } from '@mui/material/styles';
 import * as React from 'react';
 // start -> MUI with react-router
 import PropTypes from 'prop-types';
 import { Link as RouterLink, MemoryRouter } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 // end -> MUI with react-router
-export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+// export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 export const LinkBehavior = React.forwardRef((props, ref) => (
     <RouterLink ref={ref} to="/" {...props} role={undefined} />
@@ -39,31 +42,31 @@ children: PropTypes.node,
 };
 
 export default function App() {
-    const [mode, setMode] = React.useState('light');
-    const colorMode = React.useMemo(
-        () => ({
-            toggleColorMode: () => {
-            setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
-            },
-        }),
-        [],
-        );
+    // const [mode, setMode] = React.useState('light');
+    // const colorMode = React.useMemo(
+    //     () => ({
+    //         toggleColorMode: () => {
+    //         setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+    //         },
+    //     }),
+    //     [],
+    //     );
     
-    const theme = React.useMemo(
-        () =>
-            createTheme({
-            root: {
-                flexGrow: 1,
-                },
-            palette: {
-                mode,
-            },
-            }),
-        [mode],
-        );
+    // const theme = React.useMemo(
+    //     () =>
+    //         createTheme({
+    //         root: {
+    //             flexGrow: 1,
+    //             },
+    //         palette: {
+    //             mode,
+    //         },
+    //         }),
+    //     [mode],
+    //     );
  return (
-    <ColorModeContext.Provider value={colorMode}>
-        <ThemeProvider theme={theme}>
+    // <ColorModeContext.Provider value={colorMode}>
+    //     <ThemeProvider theme={theme}>
             <Router>
                 <Routes>
                     <Route path="/" element={<Layout />}>
@@ -80,11 +83,14 @@ export default function App() {
                         <Route path="extra/extra/:pk" element={<Extra />} />
                         <Route path="pizza/:pk" element={<Pizza />} />
                         <Route path="extra/:pk" element={<Extra />} />
+                        <Route path="CheckOut" element={<CheckOut />} />
+                        <Route path="OrderDetails" element={<OrderDetails />} />
+                        <Route path="OrderSuccess" element={<OrderSuccess />} />
                     </Route>
                 </Routes>
             </Router>
-        </ThemeProvider>
-    </ColorModeContext.Provider>
+    //     </ThemeProvider>
+    // </ColorModeContext.Provider>
     
  );
 }

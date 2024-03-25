@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 
 import PizzaCard from "../components/PizzaCard";
+import Cart from "../components/Cart";
 
 import { useContext } from 'react'
 import { Context } from '../Context'
@@ -40,19 +41,31 @@ const PizzaList = () => {
     };
 
     return (
-        <>
-        <Box sx={{border:'1px solid'}} >
-            <Typography sx={{marginBottom:3, textAlign: 'center'}} variant="h4" component="div">
-                Pizzas
-            </Typography>
-        </Box>
-        
-        <Box sx={{ flexGrow: 1, border:'1px solid' }}>
-            <Grid container spacing={2} >
-                {Data()}
+        <Grid
+            container
+            spacing={2}
+            direction="row"
+            sx={{marginTop:1}}
+        >
+            <Grid sx={{border:'1px solid'}} item xs={12} sm={12} md={8} lg={9}>
+                <Box sx={{border:'1px solid'}} >
+                    <Typography sx={{marginBottom:3, textAlign: 'center'}} variant="h4" component="div">
+                        Pizzas
+                    </Typography>
+                </Box>
+                <Box sx={{ flexGrow: 1, border:'1px solid' }}>
+                    <Grid container spacing={2} >
+                        {Data()}
+                    </Grid>
+                </Box>
             </Grid>
-        </Box>
-        </>
+            <Grid  sx={{border:'1px solid'}} item xs={0} sm={0} md={4} lg={3} >
+                <Cart 
+                cartItems={State.CartItems}
+                ></Cart>
+            </Grid>
+        </Grid>
+            
         
 
     );

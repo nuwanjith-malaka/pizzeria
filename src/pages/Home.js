@@ -7,6 +7,9 @@ import axios from "axios";
 import { useContext } from 'react'
 import { Context } from '../Context'
 
+import Grid from '@mui/material/Grid';
+import Cart from "../components/Cart";
+
 function Home() {
 
   const { State, setState } = useContext(Context)
@@ -61,7 +64,9 @@ function Home() {
       });
     
   }, []);
-  return (<PizzaList></PizzaList> );
+  return (
+        <PizzaList></PizzaList>
+     );
 }
 
 export default Home;

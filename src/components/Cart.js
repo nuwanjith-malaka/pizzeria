@@ -8,6 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemButton from '@mui/material/ListItemButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Link } from 'react-router-dom';
 const Cart = ({ cartItems }) => {
   // let box = document.getElementsByClassName('MuiGrid-root.MuiGrid-item.MuiGrid-grid-md-4.MuiGrid-grid-lg-3.css-e33yfj-MuiGrid-root');
   // let width = box.offsetWidth;
@@ -17,11 +18,11 @@ const Cart = ({ cartItems }) => {
         display:'flex',
         flexDirection: 'column', 
         alignItems: 'center',
-        position:'fixed',
-        width:'300px',
-        right:'20px',
-        maxHeight: '600px',
-        display:{xs:'none', md:'flex'}
+        display:{xs:'none', md:'flex'},
+        border:'1px solid',
+        position:'relative',
+        textAlign:'center'
+        
       }}>
         <Box 
           sx={{
@@ -32,9 +33,7 @@ const Cart = ({ cartItems }) => {
             paddingTop:'10px',
             paddingBottom:'10px',
             border: '1px solid',
-            width:'300px',
-            position:'fixed',
-            display:{xs:'none', md:'flex'}
+            width:'100%',
           }}
         >
           <ShoppingCartIcon></ShoppingCartIcon>
@@ -47,13 +46,11 @@ const Cart = ({ cartItems }) => {
             display:'flex',
             flexDirection: 'column', 
             padding: '10px 5px 5px 10px',
-            overflow: 'auto',
-            position:'fixed',
-            width:'300px',
-            top:'150px',
-            bottom:'50px',
-            maxHeight: '525px',
-            display:{xs:'none', md:'flex'}
+            width:'100%',
+            maxHeight: '485px',
+            minHeight: '485px',
+            overflow:'auto',
+            marginBottom:'50px'
           }}>
           {cartItems.length === 0 ? (
             <>
@@ -85,22 +82,26 @@ const Cart = ({ cartItems }) => {
             ))
           )}
         </Box>
-        <Box>
-        <Button
-              type="submit"
-              sx={{
-                justifyContent:'center',
-                position:'fixed',
-                bottom:'20px',
-                width:'303px',
-                right:'18px',
-                display:{xs:'none', md:'flex'}
-              }}
-              variant="contained"
-              color='success'
-            >
-              Checkout Rs. 2000.00
-            </Button>
+        <Box
+          sx={{
+            position:'absolute',
+            bottom:'0px',
+            border:'1px solid',
+            width:'100%',
+          }}
+        >
+          <Button
+            component={Link}
+            to={'/CheckOut'}
+            sx={{
+              justifyContent:'center',
+              width:'80%',
+            }}
+            variant="contained"
+            color='success'
+          >
+            Checkout Rs. 2000.00
+          </Button>
         </Box>
     </Box>
     
