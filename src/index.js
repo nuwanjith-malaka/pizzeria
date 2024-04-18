@@ -15,7 +15,7 @@ import OrderDetails from "./pages/OrderDetails";
 import OrderSuccess from "./pages/OrderSuccess";
 import UpdatePizza from "./components/UpdatePizza";
 import UpdateExtra from "./components/UpdateExtra";
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import * as React from 'react';
 // start -> MUI with react-router
 import PropTypes from 'prop-types';
@@ -42,6 +42,7 @@ children: PropTypes.node,
 };
 
 export default function App() {
+
     // const [mode, setMode] = React.useState('light');
     // const colorMode = React.useMemo(
     //     () => ({
@@ -52,21 +53,16 @@ export default function App() {
     //     [],
     //     );
     
-    // const theme = React.useMemo(
-    //     () =>
-    //         createTheme({
-    //         root: {
-    //             flexGrow: 1,
-    //             },
-    //         palette: {
-    //             mode,
-    //         },
-    //         }),
-    //     [mode],
-    //     );
+    let theme = React.useMemo(
+        () =>
+            createTheme({})
+    );
+
+    theme = responsiveFontSizes(theme);
+
  return (
     // <ColorModeContext.Provider value={colorMode}>
-    //     <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
             <Router>
                 <Routes>
                     <Route path="/" element={<Layout />}>
@@ -89,7 +85,7 @@ export default function App() {
                     </Route>
                 </Routes>
             </Router>
-    //     </ThemeProvider>
+        </ThemeProvider>
     // </ColorModeContext.Provider>
     
  );

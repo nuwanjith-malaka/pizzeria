@@ -23,7 +23,9 @@ const Layout = () => {
             content : ''
         },
         CartItems: [],
-        User:{}
+        TotalPrice:0,
+        User:{},
+        DialogOpen:false
 	}); 
 
     const alertHandleClose = () => {

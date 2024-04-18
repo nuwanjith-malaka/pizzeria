@@ -9,9 +9,15 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemButton from '@mui/material/ListItemButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'react-router-dom';
-const Cart = ({ cartItems }) => {
+
+import { useContext } from 'react'
+import { Context } from '../Context'
+
+const Cart = () => {
   // let box = document.getElementsByClassName('MuiGrid-root.MuiGrid-item.MuiGrid-grid-md-4.MuiGrid-grid-lg-3.css-e33yfj-MuiGrid-root');
   // let width = box.offsetWidth;
+  const { State, setState } = useContext(Context)
+
   return (
     <Box
       sx={{
@@ -52,14 +58,14 @@ const Cart = ({ cartItems }) => {
             overflow:'auto',
             marginBottom:'50px'
           }}>
-          {cartItems.length === 0 ? (
+          {State.CartItems.length === 0 ? (
             <>
             <Typography variant="p"> Your Cart looks a little empty.</Typography>
             <br></br>
             <Typography variant="p"> Check out some of our unbeatable deals.</Typography>
             </>
           ) : (
-            cartItems.map((item) => (
+            State.CartItems.map((item) => (
               <Box sx={{
               }}>
               <List disablePadding>
@@ -70,10 +76,60 @@ const Cart = ({ cartItems }) => {
               </List>
               <List>
                 <ListItem disablePadding>
-                  <ListItemButton><ListItemIcon sx={{display:'flex', justifyContent:'center', }}><RemoveIcon></RemoveIcon></ListItemIcon></ListItemButton>
+                  <ListItemButton
+                    onClick={() => {
+                      if (item.quantity === 1){
+                        return
+                      }
+                      setState((prevState) => {
+                        let itemPrice = 0
+                        return {...prevState, 
+                                    CartItems: prevState.CartItems.map((currentItem) => {
+                                      if (currentItem.pk ===item.pk){
+                                        itemPrice = currentItem.price
+                                        return {...currentItem, 
+                                                   quantity:currentItem.quantity - 1,
+                                                   totalPrice: currentItem.totalPrice - itemPrice
+                                                }
+                                      }
+                                      return currentItem
+                                    }),
+                                    TotalPrice:prevState.TotalPrice - itemPrice
+                                }})}}>
+                  <ListItemIcon sx={{display:'flex', justifyContent:'center', }}><RemoveIcon></RemoveIcon></ListItemIcon></ListItemButton>
                   <ListItemText primary={`${item.quantity}`}></ListItemText>
-                  <ListItemButton><ListItemIcon sx={{display:'flex', justifyContent:'center', MaxWidth:'30px'}}> <AddIcon></AddIcon></ListItemIcon></ListItemButton>
-                  <ListItemButton><DeleteIcon></DeleteIcon></ListItemButton>
+                  <ListItemButton
+                    onClick={() => {
+                      setState((prevState) => {
+                        let itemPrice = 0
+                        return {...prevState, 
+                                    CartItems: prevState.CartItems.map((currentItem) => {
+                                      if (currentItem.pk ===item.pk){
+                                        itemPrice = currentItem.price
+                                        return {...currentItem, 
+                                                  quantity:currentItem.quantity + 1,
+                                                  totalPrice: currentItem.totalPrice + itemPrice
+                                               }
+                                      }
+                                      return currentItem
+                                    }),
+                                    TotalPrice:prevState.TotalPrice + itemPrice
+                                }})}}>
+                  <ListItemIcon sx={{display:'flex', justifyContent:'center', MaxWidth:'30px'}}> <AddIcon></AddIcon></ListItemIcon></ListItemButton>
+                  <ListItemButton
+                    onClick={() => {
+                      setState((prevState) => {
+                        let itemPrice = 0
+                        return {...prevState, 
+                                    CartItems: prevState.CartItems.filter((currentItem) => {
+                                      if (currentItem.pk ===item.pk){
+                                        itemPrice = currentItem.totalPrice
+                                      }
+                                      return currentItem.pk !== item.pk
+                                    }),
+                                    TotalPrice:prevState.TotalPrice - itemPrice
+                                }})}}>
+                  <DeleteIcon></DeleteIcon></ListItemButton>
                 </ListItem>
                 <Divider variant="middle" component="li" />
               </List>
@@ -100,7 +156,7 @@ const Cart = ({ cartItems }) => {
             variant="contained"
             color='success'
           >
-            Checkout Rs. 2000.00
+            Checkout Rs. {State.TotalPrice}.00
           </Button>
         </Box>
     </Box>

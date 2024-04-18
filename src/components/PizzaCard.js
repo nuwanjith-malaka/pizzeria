@@ -41,11 +41,11 @@ export default function PizzaCard({Pizza}) {
         </Typography>
         </Box>
         <Box>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          <Typography color="text.secondary" gutterBottom>
           {Pizza.pk}
         </Typography>
         <Typography variant="body2">
-          {Pizza.description.slice(0, 45)}
+          {Pizza.description.slice(0, 40)}
         </Typography>
         <Typography marginTop="10px" color="text.secondary">starting from</Typography>
         <Typography >${Pizza["starting price"]}</Typography>
