@@ -41,7 +41,7 @@ const Layout = () => {
  <>
  <Context.Provider value={{ State, setState }}>
   <AppBar />
-  <Container sx={{paddingRight: '0px',marginRight:'0px', border:'5px solid'}} maxWidth='xl'>
+  <Container sx={{paddingRight: '0px',marginRight:'0px'}} maxWidth='xl'>
     <CssBaseline/>
     <FormAlert
       handleClose = {alertHandleClose}

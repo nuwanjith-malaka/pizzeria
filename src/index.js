@@ -11,16 +11,17 @@ import ListExtra from "./pages/ListExtra";
 import CreatePizza from "./pages/CreatePizza";
 import CreateExtra from "./pages/CreateExtra";
 import CheckOut from "./pages/CheckOut";
-import OrderDetails from "./pages/OrderDetails";
 import OrderSuccess from "./pages/OrderSuccess";
 import UpdatePizza from "./components/UpdatePizza";
 import UpdateExtra from "./components/UpdateExtra";
+import Cart from "./components/Cart";
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import * as React from 'react';
 // start -> MUI with react-router
 import PropTypes from 'prop-types';
 import { Link as RouterLink, MemoryRouter } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
+
 // end -> MUI with react-router
 // export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
@@ -80,7 +81,7 @@ export default function App() {
                         <Route path="pizza/:pk" element={<Pizza />} />
                         <Route path="extra/:pk" element={<Extra />} />
                         <Route path="CheckOut" element={<CheckOut />} />
-                        <Route path="OrderDetails" element={<OrderDetails />} />
+                        <Route path="Cart" element={<Cart />} />
                         <Route path="OrderSuccess" element={<OrderSuccess />} />
                     </Route>
                 </Routes>

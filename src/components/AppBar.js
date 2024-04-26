@@ -15,6 +15,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Badge from '@mui/material/Badge';
 
 // start -> MUI dark and light mode toggling
 // import { useTheme } from '@mui/material/styles';
@@ -172,10 +173,13 @@ function ResponsiveAppBar() {
             </IconButton>
           </Box> */}
             <IconButton 
-              sx={{marginLeft:'1%'}} 
               component={RouterLink} 
-              to={ "/CheckOut"}>
-              <ShoppingCartIcon></ShoppingCartIcon>
+              to={ "/Cart"}
+              sx={{marginLeft:'1%', display: { xs: 'flex', md: 'none' } }}
+            >
+              <Badge badgeContent={State.CartItems.length} color="secondary">
+                <ShoppingCartIcon></ShoppingCartIcon>
+              </Badge>
             </IconButton>
         </Toolbar>
       </Container>

@@ -14,7 +14,6 @@ const OrderSuccess = () => {
                     flexDirection:'column',
                     justifyContent:'center',
                     textAlign:'center',
-                    border:'1px solid',
                     marginTop:'50px',
                     gap:'20px'
                 }}
@@ -23,7 +22,6 @@ const OrderSuccess = () => {
                     sx={{ 
                         fontSize: 100,
                         color: pink[500] ,
-                        border:'1px solid',
                         margin:'auto'
                     }}
                 >

@@ -4,10 +4,10 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { TextareaAutosize } from '@mui/base/TextareaAutosize';
-
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link as RouterLink, MemoryRouter } from 'react-router-dom';
 
-export default function OrderDetailsForm(props) {
+export default function CheckOutForm(props) {
   const {formik} = props
   console.log('starting OrderDetailsForm')
   return (
@@ -87,17 +87,26 @@ export default function OrderDetailsForm(props) {
               error={formik.touched.email && Boolean(formik.errors.email)}
               helperText={formik.touched.email && formik.errors.email}
             />
-            
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 2, mb: 2 }}
+            <Box display="flex" justifyContent="center" marginTop={5}>
+              <Button
               component={RouterLink} 
-              to={"/OrderSuccess"} 
-            >
-              {props.children}
-            </Button>
+              to={"/Pizza"} 
+              variant="contained" 
+              color="warning"
+              sx={{marginRight:2}}
+              startIcon={<ArrowBackIcon></ArrowBackIcon>}
+              >
+              Continue Shopping
+              </Button>
+              <Button 
+                  type="submit"
+                  variant="contained"
+                  component={RouterLink} 
+                  to={"/OrderSuccess"} 
+              >
+              Place Order
+              </Button>
+            </Box> 
           </Box>
   )
 }

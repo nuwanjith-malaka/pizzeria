@@ -25,12 +25,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
 
 import {Link, Routes, Route, useNavigate, useLocation} from 'react-router-dom';
 
@@ -202,7 +196,6 @@ const Pizza = () => {
                   display:'flex',
                   alignItems:'center',
                   justifyContent:'space-between',
-                  border:'1px solid',
                   
                 }}>
                   <img src={`https://malakas3.s3.amazonaws.com/pizzeria/pizzas/${key}pz.jpg`} alt="pan" style={{maxWidth: "50px", maxHeight:'50px'}} />
@@ -228,7 +221,6 @@ const Pizza = () => {
         <Grid 
           item xs={12} sm={12} md={3} lg={3}
           sx={{
-            border:'1px solid',
             justifyContent:'center', 
             textAlign:'center',
           }} 
@@ -243,7 +235,6 @@ const Pizza = () => {
           </Typography>
             <Box
               display="flex"
-              border='1px solid'
               component="img"
               maxWidth="300px" 
               width='100%'
@@ -286,7 +277,7 @@ const Pizza = () => {
             <OnlyTwoExtraDialog></OnlyTwoExtraDialog>
             </Box>
         </Grid>
-        <Grid sx={{border:'1px solid'}} item xs={12} sm={12} md={6} lg={6} >
+        <Grid item xs={12} sm={12} md={6} lg={6} >
               <Accordion defaultExpanded>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
@@ -339,7 +330,6 @@ const Pizza = () => {
                             flexWrap:'wrap',
                             alignItems:'center',
                             justifyContent:'left',
-                            border:'1px solid',
                             gap:'15px'
                           }}
                           value={OrderItem.size}
@@ -440,7 +430,6 @@ const Pizza = () => {
                 flexWrap:'wrap',
                 marginTop: '20px',
                 marginBottom:'20px',
-                border:'1px solid',
                 display:'flex',
                 alignItems:'center',
                 justifyContent:'center',
@@ -480,11 +469,14 @@ const Pizza = () => {
         </Grid>
         <Grid 
           item xs={12} sm={12} md={3} lg={3}
-          sx={{
-            border:'1px solid',
-          }} 
         >
-          <Cart></Cart>
+          <Box
+            sx={{
+                display:{xs:'none', md:'flex'},
+            }}
+          >
+            <Cart></Cart>
+          </Box>
         </Grid>
     </Grid>
       

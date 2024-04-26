@@ -24,11 +24,10 @@ const Cart = () => {
         display:'flex',
         flexDirection: 'column', 
         alignItems: 'center',
-        display:{xs:'none', md:'flex'},
         border:'1px solid',
         position:'relative',
-        textAlign:'center'
-        
+        textAlign:'center',
+        width:'100%',
       }}>
         <Box 
           sx={{
@@ -38,7 +37,7 @@ const Cart = () => {
             justifyContent: 'center',
             paddingTop:'10px',
             paddingBottom:'10px',
-            border: '1px solid',
+            borderBottom: '1px solid',
             width:'100%',
           }}
         >
@@ -47,8 +46,6 @@ const Cart = () => {
         </Box>
         <Box 
           sx={{
-            borderRight: '1px solid',
-            borderLeft: '1px solid',
             display:'flex',
             flexDirection: 'column', 
             padding: '10px 5px 5px 10px',
@@ -71,7 +68,24 @@ const Cart = () => {
               <List disablePadding>
               <ListItem key={item.id} disablePadding>
                 <ListItemAvatar><Avatar alt={item.name} src={item.image} /></ListItemAvatar>
-                <ListItemText primary={item.name} disablePadding></ListItemText>
+                <ListItemText 
+                  disablePadding
+                  primary={item.name} 
+                  secondary={
+                    <React.Fragment>
+                        {
+                          (function(){
+                            let extrasForCartItem = []
+                            for (let extra of item.extras){
+                              extrasForCartItem.push(<Typography variant="caption" sx={{display:'block'}}>{`Extra ${extra.name } Rs.(${extra.price})`}</Typography>)
+                            } 
+                            return extrasForCartItem
+                          }())
+                        }
+                    </React.Fragment>
+                  } 
+                ></ListItemText>
+                
               </ListItem>
               </List>
               <List>
@@ -96,7 +110,10 @@ const Cart = () => {
                                     }),
                                     TotalPrice:prevState.TotalPrice - itemPrice
                                 }})}}>
-                  <ListItemIcon sx={{display:'flex', justifyContent:'center', }}><RemoveIcon></RemoveIcon></ListItemIcon></ListItemButton>
+                    <ListItemIcon sx={{display:'flex', justifyContent:'center', }}>
+                      <RemoveIcon></RemoveIcon>
+                    </ListItemIcon>
+                  </ListItemButton>
                   <ListItemText primary={`${item.quantity}`}></ListItemText>
                   <ListItemButton
                     onClick={() => {
@@ -115,7 +132,10 @@ const Cart = () => {
                                     }),
                                     TotalPrice:prevState.TotalPrice + itemPrice
                                 }})}}>
-                  <ListItemIcon sx={{display:'flex', justifyContent:'center', MaxWidth:'30px'}}> <AddIcon></AddIcon></ListItemIcon></ListItemButton>
+                    <ListItemIcon sx={{display:'flex', justifyContent:'center', MaxWidth:'30px'}}>
+                      <AddIcon></AddIcon>
+                    </ListItemIcon>
+                  </ListItemButton>
                   <ListItemButton
                     onClick={() => {
                       setState((prevState) => {
@@ -129,7 +149,8 @@ const Cart = () => {
                                     }),
                                     TotalPrice:prevState.TotalPrice - itemPrice
                                 }})}}>
-                  <DeleteIcon></DeleteIcon></ListItemButton>
+                    <DeleteIcon></DeleteIcon>
+                  </ListItemButton>
                 </ListItem>
                 <Divider variant="middle" component="li" />
               </List>
@@ -142,7 +163,6 @@ const Cart = () => {
           sx={{
             position:'absolute',
             bottom:'0px',
-            border:'1px solid',
             width:'100%',
           }}
         >

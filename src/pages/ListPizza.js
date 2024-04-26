@@ -47,22 +47,27 @@ const PizzaList = () => {
             direction="row"
             sx={{marginTop:1}}
         >
-            <Grid sx={{border:'1px solid'}} item xs={12} sm={12} md={8} lg={9}>
-                <Box sx={{border:'1px solid'}} >
+            <Grid item xs={12} sm={12} md={8} lg={9}>
+                <Box>
                     <Typography sx={{marginBottom:3, textAlign: 'center'}} variant="h4" component="div">
                         Pizzas
                     </Typography>
                 </Box>
-                <Box sx={{ flexGrow: 1, border:'1px solid' }}>
+                <Box sx={{ flexGrow: 1}}>
                     <Grid container spacing={2} >
                         {Data()}
                     </Grid>
                 </Box>
             </Grid>
-            <Grid  sx={{border:'1px solid'}} item xs={0} sm={0} md={4} lg={3} >
-                <Cart 
-                cartItems={State.CartItems}
-                ></Cart>
+            <Grid item xs={0} sm={0} md={4} lg={3} >
+                <Box
+                    sx={{
+                        display:{xs:'none', md:'flex'},
+                        }}
+                >
+                    <Cart></Cart>
+                </Box>
+                
             </Grid>
         </Grid>
             
