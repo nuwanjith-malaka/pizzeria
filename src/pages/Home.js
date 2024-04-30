@@ -71,7 +71,7 @@ function Home() {
       console.log('started signinuser')
       const data = {
         grant_type: 'authorization_code',
-        client_id: 'qgklh1tp03tvqav39sjaafct2',
+        client_id: 'scf25im6fm792m6ocblst49g5',
         code: authorizationCode,
       };
     
@@ -80,10 +80,6 @@ function Home() {
         url: 'https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token',
         data: qs.stringify(data),
     
-        auth: {
-          username: 'qgklh1tp03tvqav39sjaafct2',
-          password: '1arrl07u7ibb4cr8vlo7stentrm4gi96chfk1oh544maqvjla1r6',
-        },
       };
 
       return new Promise(() => {
@@ -94,7 +90,7 @@ function Home() {
           .catch((error) => {
             console.log('printing signin request error', error);
           });
-          })
+      })
     }
 
     const queryParams = new URLSearchParams(window.location.search);
