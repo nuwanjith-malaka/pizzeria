@@ -10,9 +10,13 @@ import { Context } from '../Context'
 import Grid from '@mui/material/Grid';
 import Cart from "../components/Cart";
 
+import * as qs from 'qs'
+import { useLocation } from 'react-router-dom';
+  
 function Home() {
 
   const { State, setState } = useContext(Context)
+  const location = useLocation();
 
   useEffect(() => {
 
@@ -62,7 +66,43 @@ function Home() {
       .catch((err)=>{
         console.log('promise all error', err)
       });
+
+    const signInUser = (authorizationCode) => {
+      const data = {
+        grant_type: 'authorization_code',
+        client_id: 'qgklh1tp03tvqav39sjaafct2',
+        code: authorizationCode,
+        scope: 'email',
+      };
     
+      const p = {
+        method: 'post',
+        url: 'https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token',
+        data: qs.stringify(data),
+    
+        auth: {
+          username: 'qgklh1tp03tvqav39sjaafct2',
+          password: '1arrl07u7ibb4cr8vlo7stentrm4gi96chfk1oh544maqvjla1r6',
+        },
+      };
+
+      return new Promise(() => {
+        axios(p)
+          .then(({ response }) => {
+            console.log('printing signin response', response)
+          })
+          .catch((error) => {
+            console.log('printing signin request error', error);
+          });
+          })
+    }
+
+    const queryParams = new URLSearchParams(location.search);
+    if (queryParams.has('code')){
+      const authorizationCode = queryParams.get('code'); 
+      console.log("authorization code", authorizationCode)
+      signInUser(authorizationCode).then()
+    }
   }, []);
   return (
         <PizzaList></PizzaList>

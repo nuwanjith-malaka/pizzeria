@@ -17,6 +17,7 @@ import Grid from '@mui/material/Grid';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 
+import axios from "axios";
 // start -> MUI dark and light mode toggling
 // import { useTheme } from '@mui/material/styles';
 // import Brightness4Icon from '@mui/icons-material/Brightness4';
@@ -29,18 +30,20 @@ import CssBaseline from '@mui/material/CssBaseline';
 // start -> MUI with react-router
 import PropTypes from 'prop-types';
 import { Link as RouterLink, MemoryRouter } from 'react-router-dom';
+
 import { StaticRouter } from 'react-router-dom/server';
 
 import MenuDrawer from './MenuDrawer';
 // end -> MUI with react-router
 
-  import { useContext } from 'react'
+import { useContext } from 'react'
 import { Context } from '../Context'
 
 const pages = ['Pizza', 'Extra', 'Create Pizza', 'Create Extra'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
+
   const { State, setState } = useContext(Context)
 
   // start -> MUI dark and light mode toggling
@@ -66,7 +69,6 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  
 
   return (
     <AppBar position="sticky">
@@ -156,15 +158,15 @@ function ResponsiveAppBar() {
                     </Menu>
                   </Box>
                 :
-                  <Button 
-                    component={RouterLink} 
-                    to={ "/SignIn" }
-                    key={'SignIn'}
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
-                  >
-                    {'SignIn'}
-                  </Button>     
+                  <a href="https://pizzzzeria.auth.us-east-1.amazoncognito.com/login?client_id=scf25im6fm792m6ocblst49g5&response_type=code&scope=com.pizzeria.extra%2Fwrite+com.pizzeria.pizza%2Fwrite+email+openid+phone&redirect_uri=https%3A%2F%2Fpizzzzeria.com">
+                    <Button 
+                      key={'SignIn'}
+                      sx={{ my: 2, color: 'white', display: 'block' }}
+                    >
+                      {'SignIn'}
+                    </Button>     
+                  </a>
+                  
             }
           
           {/* <Box sx={{ flexGrow: 0 }}>
