@@ -68,6 +68,7 @@ function Home() {
       });
 
     const signInUser = (authorizationCode) => {
+      console.log('started signinuser')
       const data = {
         grant_type: 'authorization_code',
         client_id: 'qgklh1tp03tvqav39sjaafct2',
@@ -97,6 +98,7 @@ function Home() {
     }
 
     const queryParams = new URLSearchParams(location.search);
+    console.log('printing URLSearchParams', queryParams)
     if (queryParams.has('code')){
       const authorizationCode = queryParams.get('code'); 
       console.log("authorization code", authorizationCode)
