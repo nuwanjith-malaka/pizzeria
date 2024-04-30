@@ -72,7 +72,6 @@ function Home() {
         grant_type: 'authorization_code',
         client_id: 'qgklh1tp03tvqav39sjaafct2',
         code: authorizationCode,
-        scope: 'email',
       };
     
       const p = {
