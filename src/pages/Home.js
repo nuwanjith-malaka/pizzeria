@@ -97,7 +97,7 @@ function Home() {
           })
     }
 
-    const queryParams = new URLSearchParams(location.search);
+    const queryParams = new URLSearchParams(window.location.search);
     console.log('printing URLSearchParams', queryParams)
     if (queryParams.has('code')){
       const authorizationCode = queryParams.get('code'); 
