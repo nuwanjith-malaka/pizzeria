@@ -71,7 +71,7 @@ function Home() {
       console.log('started signinuser')
       const data = {
         grant_type: 'authorization_code',
-        client_id: 'scf25im6fm792m6ocblst49g5',
+        client_id: 'qgklh1tp03tvqav39sjaafct2',
         code: authorizationCode,
       };
     
@@ -80,10 +80,14 @@ function Home() {
         url: 'https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token',
         data: qs.stringify(data),
     
+        auth: {
+          username: 'qgklh1tp03tvqav39sjaafct2',
+          password: '1arrl07u7ibb4cr8vlo7stentrm4gi96chfk1oh544maqvjla1r6',
+        },
       };
-
+      
       return new Promise(() => {
-        console.log('printing request to be sent from axios', p)
+        console.log('printing request to be sent from axios (latest)', p)
         axios(p)
           .then(({ response }) => {
             console.log('printing signin response', response)
