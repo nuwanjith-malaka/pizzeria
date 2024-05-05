@@ -158,7 +158,7 @@ function ResponsiveAppBar() {
                     </Menu>
                   </Box>
                 :
-                  <a href="https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/authorize?client_id=scf25im6fm792m6ocblst49g5&response_type=code&scope=openid+profile+aws.cognito.signin.user.admin+email+phone&redirect_uri=https%3A%2F%2Fpizzzzeria.com&state=abcdefg">
+                  <a href="https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/authorize?client_id=qgklh1tp03tvqav39sjaafct2&response_type=code&scope=openid+profile+aws.cognito.signin.user.admin+email+phone&redirect_uri=https%3A%2F%2Fpizzzzeria.com&state=abcdefg">
                     <Button 
                       key={'SignIn'}
                       sx={{ my: 2, color: 'white', display: 'block' }}
