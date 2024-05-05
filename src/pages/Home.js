@@ -72,6 +72,8 @@ function Home() {
       const data = {
         grant_type: 'authorization_code',
         client_id: 'qgklh1tp03tvqav39sjaafct2',
+        client_secret: '1arrl07u7ibb4cr8vlo7stentrm4gi96chfk1oh544maqvjla1r6',
+        redirect_uri:'https://pizzzzeria.com',
         code: authorizationCode,
       };
     
@@ -79,11 +81,10 @@ function Home() {
         method: 'post',
         url: 'https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token',
         data: qs.stringify(data),
-    
-        auth: {
-          username: 'qgklh1tp03tvqav39sjaafct2',
-          password: '1arrl07u7ibb4cr8vlo7stentrm4gi96chfk1oh544maqvjla1r6',
-        },
+        headers: {
+                    'Authorization': 'Basic cWdrbGgxdHAwM3R2cWF2MzlzamFhZmN0MjoxYXJybDA3dTdpYmI0Y3I4dmxvN3N0ZW50cm00Z2k5NmNoZmsxb2g1NDRtYXF2amxhMXI2',
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                 }
       };
       
       return new Promise(() => {
@@ -112,3 +113,12 @@ function Home() {
 }
 
 export default Home;
+
+// curl -X POST https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token&Content-Type='application/x-www-form-urlencoded'&Authorization=Basic grant_type=authorization_code&client_id=&code=AUTHORIZATION_CODE
+
+// curl -X POST https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token -H "Content-Type"="application/x-www-form-urlencoded" -H "Authorization"="Basic cWdrbGgxdHAwM3R2cWF2MzlzamFhZmN0MjoxYXJybDA3dTdpYmI0Y3I4dmxvN3N0ZW50cm00Z2k5NmNoZmsxb2g1NDRtYXF2amxhMXI2" -d '{"grant_type": "authorization_code", "client_id": "qgklh1tp03tvqav39sjaafct2", "client_secret": "1arrl07u7ibb4cr8vlo7stentrm4gi96chfk1oh544maqvjla1r6", "code": "d328df29-6421-47c3-9c12-23d24213f5f5"}' 
+                            
+//                             grant_type=authorization_code&
+//                             client_id=1example23456789&
+//                             code=AUTHORIZATION_CODE&
+//                             redirect_uri=com.myclientapp://myclient/redirect
