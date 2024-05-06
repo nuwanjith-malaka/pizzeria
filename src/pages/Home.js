@@ -67,8 +67,8 @@ function Home() {
         console.log('promise all error', err)
       });
 
-    const signInUser = (authorizationCode) => {
-      console.log('started signinuser')
+    const getUserTokens = (authorizationCode) => {
+      console.log('started getUserTokens')
       const data = {
         grant_type: 'authorization_code',
         client_id: 'qgklh1tp03tvqav39sjaafct2',
@@ -79,7 +79,7 @@ function Home() {
     
       const p = {
         method: 'post',
-        url: 'https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/authorize',
+        url: 'https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token',
         data: qs.stringify(data),
         headers: {
                     'Authorization': 'Basic cWdrbGgxdHAwM3R2cWF2MzlzamFhZmN0MjoxYXJybDA3dTdpYmI0Y3I4dmxvN3N0ZW50cm00Z2k5NmNoZmsxb2g1NDRtYXF2amxhMXI2',
@@ -89,13 +89,13 @@ function Home() {
       };
       
       return new Promise(() => {
-        console.log('printing request to be sent from axios (latest)', p)
+        console.log('printing request to be sent from axios', p)
         axios(p)
           .then(({ response }) => {
-            console.log('printing signin response', response)
+            console.log('printing getUserTokens response', response)
           })
           .catch((error) => {
-            console.log('printing signin request error', error);
+            console.log('printing getUserTokens request error', error);
           });
       })
     }
@@ -105,7 +105,7 @@ function Home() {
     if (queryParams.has('code')){
       const authorizationCode = queryParams.get('code'); 
       console.log("authorization code", authorizationCode)
-      signInUser(authorizationCode).then()
+      getUserTokens(authorizationCode).then()
     }
   }, []);
   return (
