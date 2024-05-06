@@ -89,7 +89,7 @@ function Home() {
       };
       
       return new Promise(() => {
-        console.log('printing request to be sent from axios', p)
+        console.log('printing getUserTokens request to be sent from axios', p)
         axios(p)
           .then(({ response }) => {
             console.log('printing getUserTokens response', response)

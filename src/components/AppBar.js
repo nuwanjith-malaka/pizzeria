@@ -16,7 +16,6 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
-import * as qs from 'qs'
 
 import axios from "axios";
 // start -> MUI dark and light mode toggling
@@ -70,36 +69,6 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-  const signInUser = () => {
-    console.log('started signinuser')
-  
-    const p = {
-      method: 'get',
-      url: 'https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/authorize',
-      params: {
-        client_id: 'qgklh1tp03tvqav39sjaafct2',
-        redirect_uri:'https://pizzzzeria.com',
-        response_type:'code',
-        scope:'openid profile aws.cognito.signin.user.admin email phone',
-        state:'abcdefg'
-      },
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      }
-    };
-    
-    return new Promise(() => {
-      console.log('printing request to be sent from axios', p)
-      axios(p)
-        .then(({ response }) => {
-          console.log('printing signin response', response)
-        })
-        .catch((error) => {
-          console.log('printing signin request error', error);
-        });
-    })
-  }
 
   return (
     <AppBar position="sticky">
@@ -189,13 +158,14 @@ function ResponsiveAppBar() {
                     </Menu>
                   </Box>
                 :
+                  <a href="https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/authorize?client_id=qgklh1tp03tvqav39sjaafct2&response_type=code&scope=openid+profile+aws.cognito.signin.user.admin+email+phone&redirect_uri=https%3A%2F%2Fpizzzzeria.com&state=abcdefg">
                     <Button 
-                      onClick={signInUser}
                       key={'SignIn'}
                       sx={{ my: 2, color: 'white', display: 'block' }}
                     >
                       {'SignIn'}
-                    </Button>   
+                    </Button>     
+                  </a>
                   
             }
           
