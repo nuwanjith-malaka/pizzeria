@@ -22,6 +22,7 @@ function Home() {
 
     //let pizzas = []
     //let extras = []
+    console.log('latest deployment => 17:17')
 
     function getExtras(){
       return new Promise((resolve, reject)=>{
@@ -57,16 +58,6 @@ function Home() {
       })
     }
 
-    Promise.all([getPizzas(), getExtras()])
-      .then(([pizzas, extras]) => {
-        console.log('adding pizzas and extras to the state')
-        setState({...State, Extras:extras, Pizzas:pizzas});
-        console.log('printing state',State)
-      })
-      .catch((err)=>{
-        console.log('promise all error', err)
-      });
-
     const getUserTokens = (authorizationCode) => {
       console.log('started getUserTokens')
       const data = {
@@ -88,11 +79,12 @@ function Home() {
                  }
       };
       
-      return new Promise(() => {
+      return new Promise((resolve) => {
         console.log('printing getUserTokens request to be sent from axios', p)
         axios(p)
           .then(({ response }) => {
             console.log('printing getUserTokens response', response)
+            resolve(response)
           })
           .catch((error) => {
             console.log('printing getUserTokens request error', error);
@@ -100,13 +92,27 @@ function Home() {
       })
     }
 
-    const queryParams = new URLSearchParams(window.location.search);
-    console.log('printing URLSearchParams', queryParams)
-    if (queryParams.has('code')){
-      const authorizationCode = queryParams.get('code'); 
-      console.log("authorization code", authorizationCode)
-      getUserTokens(authorizationCode).then()
-    }
+    
+
+    Promise.all([getPizzas(), getExtras()])
+      .then(([pizzas, extras]) => {
+        const queryParams = new URLSearchParams(window.location.search);
+        console.log('printing URLSearchParams', queryParams)
+        if (queryParams.has('code')){
+          const authorizationCode = queryParams.get('code'); 
+          console.log("authorization code", authorizationCode)
+          response = getUserTokens(authorizationCode).then()
+          console.log('printing token response from Promise.all', response)
+        }
+        console.log('adding pizzas and extras to the state')
+        setState({...State, Extras:extras, Pizzas:pizzas});
+        console.log('printing state',State)
+      })
+      .catch((err)=>{
+        console.log('promise all error', err)
+      });
+
+    
   }, []);
   return (
         <PizzaList></PizzaList>
