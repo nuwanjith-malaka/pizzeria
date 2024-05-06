@@ -83,7 +83,8 @@ function Home() {
         data: qs.stringify(data),
         headers: {
                     'Authorization': 'Basic cWdrbGgxdHAwM3R2cWF2MzlzamFhZmN0MjoxYXJybDA3dTdpYmI0Y3I4dmxvN3N0ZW50cm00Z2k5NmNoZmsxb2g1NDRtYXF2amxhMXI2',
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Access-Control-Allow-Origin': '*'
                  }
       };
       
@@ -123,6 +124,6 @@ export default Home;
 //                             code=AUTHORIZATION_CODE&
 //                             redirect_uri=com.myclientapp://myclient/redirect
 
-// curl -X POST https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token -H "Content-Type"="application/x-www-form-urlencoded" -H "Authorization"="Basic cWdrbGgxdHAwM3R2cWF2MzlzamFhZmN0MjoxYXJybDA3dTdpYmI0Y3I4dmxvN3N0ZW50cm00Z2k5NmNoZmsxb2g1NDRtYXF2amxhMXI2" -d '{"grant_type": "authorization_code", "client_id": "qgklh1tp03tvqav39sjaafct2", "client_secret": "1arrl07u7ibb4cr8vlo7stentrm4gi96chfk1oh544maqvjla1r6", "code": "24a7d934-13b9-46b0-925b-c61883c45eff", redirect_uri:"https://pizzzzeria.com"}'
+// curl -X POST https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token -H "Content-Type"="application/x-www-form-urlencoded" -H "Authorization"="Basic cWdrbGgxdHAwM3R2cWF2MzlzamFhZmN0MjoxYXJybDA3dTdpYmI0Y3I4dmxvN3N0ZW50cm00Z2k5NmNoZmsxb2g1NDRtYXF2amxhMXI2" -d '{"grant_type": "authorization_code", "client_id": "qgklh1tp03tvqav39sjaafct2", "client_secret": "1arrl07u7ibb4cr8vlo7stentrm4gi96chfk1oh544maqvjla1r6", "code": "b9be39ca-618e-4f74-9d35-189c56828150", redirect_uri:"https://pizzzzeria.com"}'
 
 // curl -X POST https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token -H "Content-Type"="application/x-www-form-urlencoded" -H "Authorization"="Basic cWdrbGgxdHAwM3R2cWF2MzlzamFhZmN0MjoxYXJybDA3dTdpYmI0Y3I4dmxvN3N0ZW50cm00Z2k5NmNoZmsxb2g1NDRtYXF2amxhMXI2" -d '{"grant_type": "authorization_code", "client_id": "qgklh1tp03tvqav39sjaafct2", "client_secret": "1arrl07u7ibb4cr8vlo7stentrm4gi96chfk1oh544maqvjla1r6", "code": "24a7d934-13b9-46b0-925b-c61883c45eff", redirect_uri:"https://pizzzzeria.com"}'
