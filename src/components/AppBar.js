@@ -16,6 +16,7 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
+import * as qs from 'qs'
 
 import axios from "axios";
 // start -> MUI dark and light mode toggling
@@ -70,29 +71,26 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-  const signInUser = (authorizationCode) => {
+  const signInUser = () => {
     console.log('started signinuser')
-    const data = {
-      grant_type: 'authorization_code',
-      client_id: 'qgklh1tp03tvqav39sjaafct2',
-      client_secret: '1arrl07u7ibb4cr8vlo7stentrm4gi96chfk1oh544maqvjla1r6',
-      redirect_uri:'https://pizzzzeria.com',
-      code: authorizationCode,
-    };
   
     const p = {
-      method: 'post',
+      method: 'get',
       url: 'https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/authorize',
-      data: qs.stringify(data),
+      params: {
+        client_id: 'qgklh1tp03tvqav39sjaafct2',
+        redirect_uri:'https://pizzzzeria.com',
+        response_type:'code',
+        scope:'openid profile aws.cognito.signin.user.admin email phone',
+        state:'abcdefg'
+      },
       headers: {
-                  'Authorization': 'Basic cWdrbGgxdHAwM3R2cWF2MzlzamFhZmN0MjoxYXJybDA3dTdpYmI0Y3I4dmxvN3N0ZW50cm00Z2k5NmNoZmsxb2g1NDRtYXF2amxhMXI2',
-                  'Content-Type': 'application/x-www-form-urlencoded',
-                  'Access-Control-Allow-Origin': '*'
-               }
+        'Access-Control-Allow-Origin': '*'
+      }
     };
     
     return new Promise(() => {
-      console.log('printing request to be sent from axios (latest)', p)
+      console.log('printing request to be sent from axios', p)
       axios(p)
         .then(({ response }) => {
           console.log('printing signin response', response)
@@ -191,14 +189,13 @@ function ResponsiveAppBar() {
                     </Menu>
                   </Box>
                 :
-                  <a href="https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/authorize?client_id=qgklh1tp03tvqav39sjaafct2&response_type=code&scope=openid+profile+aws.cognito.signin.user.admin+email+phone&redirect_uri=https%3A%2F%2Fpizzzzeria.com&state=abcdefg">
                     <Button 
+                      onClick={signInUser}
                       key={'SignIn'}
                       sx={{ my: 2, color: 'white', display: 'block' }}
                     >
                       {'SignIn'}
-                    </Button>     
-                  </a>
+                    </Button>   
                   
             }
           
