@@ -58,8 +58,16 @@ function Home() {
       })
     }
 
-    const getUserTokens = (authorizationCode) => {
+    const getUserTokens = (queryParams) => {
       console.log('started getUserTokens')
+
+      if (queryParams.has('code')){
+          const authorizationCode = queryParams.get('code'); 
+          console.log("authorization code", authorizationCode)
+      }
+      else {
+        return new Promise(()=>{})
+      }
       const data = {
         grant_type: 'authorization_code',
         client_id: 'qgklh1tp03tvqav39sjaafct2',
@@ -82,9 +90,9 @@ function Home() {
       return new Promise((resolve) => {
         console.log('printing getUserTokens request to be sent from axios', p)
         axios(p)
-          .then(({ response }) => {
-            console.log('printing getUserTokens response', response)
-            resolve(response)
+          .then(({ tokens }) => {
+            console.log('printing getUserTokens response', tokens)
+            resolve(tokens)
           })
           .catch((error) => {
             console.log('printing getUserTokens request error', error);
@@ -92,20 +100,13 @@ function Home() {
       })
     }
 
+    const queryParams = new URLSearchParams(window.location.search);
+    console.log('printing URLSearchParams', queryParams)
     
-
-    Promise.all([getPizzas(), getExtras()])
-      .then(([pizzas, extras]) => {
-        const queryParams = new URLSearchParams(window.location.search);
-        console.log('printing URLSearchParams', queryParams)
-        if (queryParams.has('code')){
-          const authorizationCode = queryParams.get('code'); 
-          console.log("authorization code", authorizationCode)
-          const response = getUserTokens(authorizationCode).then()
-          console.log('printing token response from Promise.all', response)
-        }
+    Promise.all([getPizzas(), getExtras(), getUserTokens(queryParams)])
+      .then(([pizzas, extras, tokens]) => {
         console.log('adding pizzas and extras to the state')
-        setState({...State, Extras:extras, Pizzas:pizzas});
+        setState({...State, Extras:extras, Pizzas:pizzas, User:tokens});
         console.log('printing state',State)
       })
       .catch((err)=>{
