@@ -22,7 +22,7 @@ function Home() {
 
     //let pizzas = []
     //let extras = []
-    console.log('latest deployment => 14:35')
+    console.log('latest deployment => 16:00')
 
     function getExtras(){
       return new Promise((resolve, reject)=>{
@@ -132,4 +132,4 @@ export default Home;
 
 // curl -X GET https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/authorize?client_id=qgklh1tp03tvqav39sjaafct2&response_type=code&scope=openid+profile+aws.cognito.signin.user.admin+email+phone&redirect_uri=https%3A%2F%2Fpizzzzeria.com&state=abcdefg"
 
-// curl -X POST https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token -H "Content-Type"="application/x-www-form-urlencoded" -H "Authorization"="Basic cWdrbGgxdHAwM3R2cWF2MzlzamFhZmN0MjoxYXJybDA3dTdpYmI0Y3I4dmxvN3N0ZW50cm00Z2k5NmNoZmsxb2g1NDRtYXF2amxhMXI2" -d "grant_type=authorization_code&client_id=qgklh1tp03tvqav39sjaafct2&client_secret=1arrl07u7ibb4cr8vlo7stentrm4gi96chfk1oh544maqvjla1r6&code=7fe19912-8dc9-42bb-9181-593be320879c&redirect_uri=https://pizzzzeria.com"
+// curl -X POST https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token -H "Content-Type"="application/x-www-form-urlencoded" -H "Authorization"="Basic cWdrbGgxdHAwM3R2cWF2MzlzamFhZmN0MjoxYXJybDA3dTdpYmI0Y3I4dmxvN3N0ZW50cm00Z2k5NmNoZmsxb2g1NDRtYXF2amxhMXI2" -d "grant_type=authorization_code&client_id=qgklh1tp03tvqav39sjaafct2&client_secret=1arrl07u7ibb4cr8vlo7stentrm4gi96chfk1oh544maqvjla1r6&code=d7825675-d258-4d54-a84b-56db10b32d93&redirect_uri=https://pizzzzeria.com"
