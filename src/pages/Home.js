@@ -103,9 +103,9 @@ function Home() {
     console.log('printing URLSearchParams', queryParams)
     
     Promise.all([getPizzas(), getExtras()])
-      .then(([pizzas, extras, tokens]) => {
+      .then(([pizzas, extras]) => {
         console.log('adding pizzas and extras to the state')
-        setState({...State, Extras:extras, Pizzas:pizzas, User:tokens});
+        setState({...State, Extras:extras, Pizzas:pizzas});
         console.log('printing state',State)
       })
       .catch((err)=>{
