@@ -22,7 +22,7 @@ function Home() {
 
     //let pizzas = []
     //let extras = []
-    console.log('latest deployment => 14:00')
+    console.log('latest deployment => 14:35')
 
     function getExtras(){
       return new Promise((resolve, reject)=>{
@@ -69,29 +69,27 @@ function Home() {
       else {
         return new Promise(()=>{})
       }
-
-      const data = {
-        grant_type: 'authorization_code',
-        client_id: 'qgklh1tp03tvqav39sjaafct2',
-        client_secret: '1arrl07u7ibb4cr8vlo7stentrm4gi96chfk1oh544maqvjla1r6',
-        redirect_uri:'https://pizzzzeria.com',
-        code: authorizationCode,
-      };
-    
-      const p = {
-        method: 'post',
-        url: 'https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token',
-        data: qs.stringify(data),
-        headers: {
-                    'Authorization': 'Basic cWdrbGgxdHAwM3R2cWF2MzlzamFhZmN0MjoxYXJybDA3dTdpYmI0Y3I4dmxvN3N0ZW50cm00Z2k5NmNoZmsxb2g1NDRtYXF2amxhMXI2',
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Access-Control-Allow-Origin': '*'
-                 }
-      };
       
       return new Promise((resolve) => {
         console.log('printing getUserTokens request to be sent from axios', p)
-        axios(p)
+        axios
+          .post(
+            'https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token', 
+            {
+              grant_type: 'authorization_code',
+              client_id: 'qgklh1tp03tvqav39sjaafct2',
+              client_secret: '1arrl07u7ibb4cr8vlo7stentrm4gi96chfk1oh544maqvjla1r6',
+              redirect_uri:'https://pizzzzeria.com',
+              code: authorizationCode,
+            },
+            {
+              headers: {
+                'Authorization': 'Basic cWdrbGgxdHAwM3R2cWF2MzlzamFhZmN0MjoxYXJybDA3dTdpYmI0Y3I4dmxvN3N0ZW50cm00Z2k5NmNoZmsxb2g1NDRtYXF2amxhMXI2',
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Access-Control-Allow-Origin': '*'
+              }
+            }
+          )
           .then(({ tokens }) => {
             console.log('printing getUserTokens response', tokens)
             resolve(tokens)
@@ -133,6 +131,6 @@ export default Home;
 //                             code=AUTHORIZATION_CODE&
 //                             redirect_uri=com.myclientapp://myclient/redirect
 
-// curl -X POST https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token -H "Content-Type"="application/x-www-form-urlencoded" -H "Authorization"="Basic cWdrbGgxdHAwM3R2cWF2MzlzamFhZmN0MjoxYXJybDA3dTdpYmI0Y3I4dmxvN3N0ZW50cm00Z2k5NmNoZmsxb2g1NDRtYXF2amxhMXI2" -d '{"grant_type": "authorization_code", "client_id": "qgklh1tp03tvqav39sjaafct2", "client_secret": "1arrl07u7ibb4cr8vlo7stentrm4gi96chfk1oh544maqvjla1r6", "code": "b9be39ca-618e-4f74-9d35-189c56828150", redirect_uri:"https://pizzzzeria.com"}'
+// curl -X GET https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/authorize?client_id=qgklh1tp03tvqav39sjaafct2&response_type=code&scope=openid+profile+aws.cognito.signin.user.admin+email+phone&redirect_uri=https%3A%2F%2Fpizzzzeria.com&state=abcdefg"
 
-// curl -X POST https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token -H "Content-Type"="application/x-www-form-urlencoded" -H "Authorization"="Basic cWdrbGgxdHAwM3R2cWF2MzlzamFhZmN0MjoxYXJybDA3dTdpYmI0Y3I4dmxvN3N0ZW50cm00Z2k5NmNoZmsxb2g1NDRtYXF2amxhMXI2" -d '{"grant_type": "authorization_code", "client_id": "qgklh1tp03tvqav39sjaafct2", "client_secret": "1arrl07u7ibb4cr8vlo7stentrm4gi96chfk1oh544maqvjla1r6", "code": "24a7d934-13b9-46b0-925b-c61883c45eff", redirect_uri:"https://pizzzzeria.com"}'
+// curl -X POST https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token -H "Content-Type"="application/x-www-form-urlencoded" -H "Authorization"="Basic cWdrbGgxdHAwM3R2cWF2MzlzamFhZmN0MjoxYXJybDA3dTdpYmI0Y3I4dmxvN3N0ZW50cm00Z2k5NmNoZmsxb2g1NDRtYXF2amxhMXI2" -d "grant_type=authorization_code&client_id=qgklh1tp03tvqav39sjaafct2&client_secret=1arrl07u7ibb4cr8vlo7stentrm4gi96chfk1oh544maqvjla1r6&code=7fe19912-8dc9-42bb-9181-593be320879c&redirect_uri=https://pizzzzeria.com"
