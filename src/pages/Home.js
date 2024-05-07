@@ -71,7 +71,6 @@ function Home() {
       }
       
       return new Promise((resolve) => {
-        console.log('printing getUserTokens request to be sent from axios', p)
         axios
           .post(
             'https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token', 
