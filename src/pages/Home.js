@@ -67,10 +67,14 @@ function Home() {
           console.log("authorization code", authorizationCode)
       }
       else {
-        return new Promise(()=>{})
+        return new Promise((resolve)=>{
+          console.log("promise resolved with guest user")
+          resolve('guest')
+        })
       }
       
       return new Promise((resolve) => {
+        console.log("sending axios request ot token endpoint")
         axios
           .post(
             'https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token', 
@@ -102,7 +106,7 @@ function Home() {
     const queryParams = new URLSearchParams(window.location.search);
     console.log('printing URLSearchParams', queryParams)
     
-    Promise.all([getPizzas(), getExtras()])
+    Promise.all([getPizzas(), getExtras(), getUserTokens(queryParams)])
       .then(([pizzas, extras]) => {
         console.log('adding pizzas and extras to the state')
         setState({...State, Extras:extras, Pizzas:pizzas});
@@ -132,4 +136,4 @@ export default Home;
 
 // curl -X GET https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/authorize?client_id=qgklh1tp03tvqav39sjaafct2&response_type=code&scope=openid+profile+aws.cognito.signin.user.admin+email+phone&redirect_uri=https%3A%2F%2Fpizzzzeria.com&state=abcdefg"
 
-// curl -X POST https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token -H "Content-Type"="application/x-www-form-urlencoded" -H "Authorization"="Basic cWdrbGgxdHAwM3R2cWF2MzlzamFhZmN0MjoxYXJybDA3dTdpYmI0Y3I4dmxvN3N0ZW50cm00Z2k5NmNoZmsxb2g1NDRtYXF2amxhMXI2" -d "grant_type=authorization_code&client_id=qgklh1tp03tvqav39sjaafct2&client_secret=1arrl07u7ibb4cr8vlo7stentrm4gi96chfk1oh544maqvjla1r6&code=b0587ff9-fa4a-43c6-a5f3-9ca5d8e00e6a&state&redirect_uri=https://pizzzzeria.com"
+// curl -X POST https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/token -H "Content-Type"="application/x-www-form-urlencoded" -H "Authorization"="Basic cWdrbGgxdHAwM3R2cWF2MzlzamFhZmN0MjoxYXJybDA3dTdpYmI0Y3I4dmxvN3N0ZW50cm00Z2k5NmNoZmsxb2g1NDRtYXF2amxhMXI2" -d "grant_type=authorization_code&client_id=qgklh1tp03tvqav39sjaafct2&client_secret=1arrl07u7ibb4cr8vlo7stentrm4gi96chfk1oh544maqvjla1r6&code=845530d1-494a-477b-82dc-2d24ac23bbeb&state&redirect_uri=https://pizzzzeria.com"
