@@ -22,7 +22,7 @@ function Home() {
 
     //let pizzas = []
     //let extras = []
-    console.log('latest deployment => 17:17')
+    console.log('latest deployment => 14:00')
 
     function getExtras(){
       return new Promise((resolve, reject)=>{
@@ -60,7 +60,7 @@ function Home() {
 
     const getUserTokens = (queryParams) => {
       console.log('started getUserTokens')
-      const authorizationCode = ''
+      let authorizationCode = ''
 
       if (queryParams.has('code')){
           authorizationCode = queryParams.get('code'); 
@@ -69,7 +69,7 @@ function Home() {
       else {
         return new Promise(()=>{})
       }
-      
+
       const data = {
         grant_type: 'authorization_code',
         client_id: 'qgklh1tp03tvqav39sjaafct2',
