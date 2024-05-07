@@ -60,14 +60,16 @@ function Home() {
 
     const getUserTokens = (queryParams) => {
       console.log('started getUserTokens')
+      const authorizationCode = ''
 
       if (queryParams.has('code')){
-          const authorizationCode = queryParams.get('code'); 
+          authorizationCode = queryParams.get('code'); 
           console.log("authorization code", authorizationCode)
       }
       else {
         return new Promise(()=>{})
       }
+      
       const data = {
         grant_type: 'authorization_code',
         client_id: 'qgklh1tp03tvqav39sjaafct2',
