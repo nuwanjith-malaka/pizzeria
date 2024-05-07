@@ -101,7 +101,7 @@ function Home() {
         if (queryParams.has('code')){
           const authorizationCode = queryParams.get('code'); 
           console.log("authorization code", authorizationCode)
-          response = getUserTokens(authorizationCode).then()
+          const response = getUserTokens(authorizationCode).then()
           console.log('printing token response from Promise.all', response)
         }
         console.log('adding pizzas and extras to the state')
