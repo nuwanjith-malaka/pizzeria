@@ -58,9 +58,11 @@ function Home() {
       })
     }
 
-    const getUserTokens = (queryParams) => {
+    const getUserTokens = () => {
       console.log('started getUserTokens')
       let authorizationCode = ''
+      const queryParams = new URLSearchParams(window.location.search);
+      console.log('printing URLSearchParams', queryParams)
 
       if (queryParams.has('code')){
           authorizationCode = queryParams.get('code'); 
@@ -102,11 +104,8 @@ function Home() {
           });
       })
     }
-
-    const queryParams = new URLSearchParams(window.location.search);
-    console.log('printing URLSearchParams', queryParams)
     
-    Promise.all([getPizzas(), getExtras(), getUserTokens(queryParams)])
+    Promise.all([getPizzas(), getExtras(), getUserTokens()])
       .then(([pizzas, extras]) => {
         console.log('adding pizzas and extras to the state')
         setState({...State, Extras:extras, Pizzas:pizzas});
