@@ -58,7 +58,7 @@ function Home() {
       })
     }
 
-    const getUserTokens = () => {
+    function getUserTokens(){
       console.log('started getUserTokens')
       let authorizationCode = ''
       const queryParams = new URLSearchParams(window.location.search);
