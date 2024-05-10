@@ -71,7 +71,11 @@ function Home() {
       else {
         return new Promise((resolve)=>{
           console.log("promise resolved with guest user")
-          resolve('guest')
+          resolve({
+            isAuthenticated: false,
+            tokens:{},
+            info:{}
+          })
         })
       }
       
@@ -97,18 +101,55 @@ function Home() {
           )
           .then(({ data }) => {
             console.log('printing getUserTokens response', data)
-            resolve(data)
+            const tokens = data
+            const userInfo = getUserInfo(tokens)
+            resolve({
+              isAuthenticated: true,
+              tokens:tokens,
+              info:userInfo
+            })
           })
           .catch((error) => {
             console.log('printing getUserTokens request error', error);
           });
       })
     }
+
+    function getUserInfo(tokens){
+      console.log('started getUserInfo')
+
+      return new Promise((resolve) => {
+        console.log("sending axios request ot userInfo endpoint")
+        axios
+          .get(
+            'https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/userInfo', 
+            {
+              headers: {
+                'Authorization': `Bearer ${tokens.access_token}`,
+                'Content-Type': 'application/x-amz-json-1.1',
+                'Access-Control-Allow-Origin': '*'
+              }
+            }
+          )
+          .then(({ data }) => {
+            console.log('printing getUserInfo response', data)
+            resolve(data)
+          })
+          .catch((error) => {
+            console.log('printing getUserInfo request error', error);
+          });
+      })
+    }
     
     Promise.all([getPizzas(), getExtras(), getUserTokens()])
-      .then(([pizzas, extras, tokens]) => {
+      .then(([pizzas, extras, user]) => {
         console.log('adding pizzas and extras to the state')
-        setState({...State, Extras:extras, Pizzas:pizzas, User:tokens});
+        setState({
+          ...State, 
+          Extras:extras, 
+          Pizzas:pizzas, 
+          User:user
+          });
         console.log('printing state',State)
       })
       .catch((err)=>{

@@ -126,7 +126,7 @@ function ResponsiveAppBar() {
             ))}
           </Box>
             {
-              (State.User !== "guest") 
+              (State.User.isAuthenticated === true) 
                 ?
                   <Box sx={{ flexGrow: 0 }}>
                     <Tooltip title="Open settings">
