@@ -126,7 +126,7 @@ function ResponsiveAppBar() {
             ))}
           </Box>
             {
-              (Object.keys(State.User).length !== 0) 
+              (Object.keys(State.User) !== "guest") 
                 ?
                   <Box sx={{ flexGrow: 0 }}>
                     <Tooltip title="Open settings">
