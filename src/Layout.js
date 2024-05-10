@@ -24,7 +24,7 @@ const Layout = () => {
         },
         CartItems: [],
         TotalPrice:0,
-        User:{},
+        User:'guest',
         DialogOpen:false
 	}); 
 
