@@ -105,7 +105,7 @@ function Home() {
       })
     }
     
-    Promise.all([getPizzas(), getExtras(), getUserTokens()])
+    Promise.all([getPizzas(), getExtras()])
       .then(([pizzas, extras]) => {
         console.log('adding pizzas and extras to the state')
         setState({...State, Extras:extras, Pizzas:pizzas});
