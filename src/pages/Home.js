@@ -95,9 +95,9 @@ function Home() {
               }
             }
           )
-          .then(({ tokens }) => {
-            console.log('printing getUserTokens response', tokens)
-            resolve(tokens)
+          .then(({ data }) => {
+            console.log('printing getUserTokens response', data)
+            resolve(data)
           })
           .catch((error) => {
             console.log('printing getUserTokens request error', error);
@@ -105,10 +105,10 @@ function Home() {
       })
     }
     
-    Promise.all([getPizzas(), getExtras()])
+    Promise.all([getPizzas(), getExtras(), getUserTokens()])
       .then(([pizzas, extras]) => {
         console.log('adding pizzas and extras to the state')
-        setState({...State, Extras:extras, Pizzas:pizzas});
+        setState({...State, Extras:extras, Pizzas:pizzas, User:data});
         console.log('printing state',State)
       })
       .catch((err)=>{
