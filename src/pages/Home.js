@@ -106,9 +106,9 @@ function Home() {
     }
     
     Promise.all([getPizzas(), getExtras(), getUserTokens()])
-      .then(([pizzas, extras]) => {
+      .then(([pizzas, extras, tokens]) => {
         console.log('adding pizzas and extras to the state')
-        setState({...State, Extras:extras, Pizzas:pizzas, User:data});
+        setState({...State, Extras:extras, Pizzas:pizzas, User:tokens});
         console.log('printing state',State)
       })
       .catch((err)=>{
