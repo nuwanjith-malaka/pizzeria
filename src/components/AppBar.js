@@ -133,7 +133,7 @@ function ResponsiveAppBar() {
                       <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                         <Avatar alt="User" src="https://malakas3.s3.amazonaws.com/pizzeria/extras/default-avatar.jpg" />
                       </IconButton>
-                      <Typography>${State.User.userInfo.email}</Typography>
+                      <Typography>${State.User.info.email}</Typography>
                     </Tooltip>
                     <Menu
                       sx={{ mt: '45px' }}
