@@ -129,11 +129,18 @@ function ResponsiveAppBar() {
               (State.User.isAuthenticated === true) 
                 ?
                   <Box sx={{ flexGrow: 0 }}>
-                    <Tooltip title="Open settings">
+                    <Tooltip 
+                      title="Open settings"
+                      sx={{
+                        display:'flex',
+                        flexDirection: 'row', 
+                        justifyContent:'center'
+                      }}
+                    >
                       <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                         <Avatar alt="User" src="https://malakas3.s3.amazonaws.com/pizzeria/extras/default-avatar.jpg" />
                       </IconButton>
-                      <Typography>${State.User.info.email}</Typography>
+                      <Typography>{State.User.info.email.split("@")[0]}</Typography>
                     </Tooltip>
                     <Menu
                       sx={{ mt: '45px' }}
