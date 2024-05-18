@@ -102,12 +102,7 @@ function Home() {
           .then(({ data }) => {
             console.log('printing getUserTokens response', data)
             const tokens = data
-            const userInfo = getUserInfo(tokens)
-            resolve({
-              isAuthenticated: true,
-              tokens:tokens,
-              info:userInfo
-            })
+            getUserInfo(tokens)
           })
           .catch((error) => {
             console.log('printing getUserTokens request error', error);
@@ -133,7 +128,11 @@ function Home() {
           )
           .then(({ data }) => {
             console.log('printing getUserInfo response', data)
-            resolve(data)
+            resolve({
+              isAuthenticated: true,
+              tokens:tokens,
+              info:data
+            })
           })
           .catch((error) => {
             console.log('printing getUserInfo request error', error);
