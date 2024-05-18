@@ -102,7 +102,8 @@ function Home() {
           .then(({ data }) => {
             console.log('printing getUserTokens response', data)
             const tokens = data
-            getUserInfo(tokens)
+            const user = getUserInfo(tokens)
+            resolve(user)
           })
           .catch((error) => {
             console.log('printing getUserTokens request error', error);
