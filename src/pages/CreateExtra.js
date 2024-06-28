@@ -43,6 +43,48 @@ const CreateExtra = () => {
 		.required('Image is required'),
 	});
 
+	function sendCreateExtraRequest(data){
+		console.log('data before stringified', data);
+			const stringifiedData = JSON.stringify(data)
+			console.log('data after stringified', stringifiedData);
+			const requestJSON = JSON.parse(stringifiedData)
+			console.log('data after json parse', requestJSON);
+			console.log('printing base64image after parse', requestJSON.image)
+			axios.post(
+				'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/extra', 
+				stringifiedData, 
+				{
+					headers: {
+					'Authorization': `Basic ${State.User.tokens.access_token}`,
+					}
+				}
+			)
+			.then(res => {
+				console.log('update extra request response',res)
+				setState({
+					...State, 
+					CurrentExtra:res.data.content,
+					CurrentAlert: {
+						...State.CurrentAlert,
+						open: true, 
+						type: 'success', 
+						content: res.data.msg
+					}
+				});
+				navigate('/Extra/:' + data.pk);
+			})
+			.catch(err => {
+				console.log('printing update extra request error', err)
+				setState({
+					...State,
+						CurrentAlert: {
+							...State.CurrentAlert,
+							open: true, 
+							type: 'error', 
+							content: err.message
+				}});
+			})
+	}
 	const formik = useFormik({
 		initialValues: {
 			pk:'',
@@ -86,6 +128,7 @@ const CreateExtra = () => {
 					.then(res =>{
 						console.log('printing base64 image', res)
 						data['image'] = res
+						sendCreateExtraRequest(data)
 					})
 					.catch(err => {
 						console.log('printing base64 image error', err)
@@ -93,43 +136,8 @@ const CreateExtra = () => {
 				}
 				else{
 					data.image = ""
+					sendCreateExtraRequest(data)
 				}
-				setTimeout(()=>{
-					console.log('data before stringified', data);
-					const stringifiedData = JSON.stringify(data)
-					console.log('data after stringified', stringifiedData);
-					const requestJSON = JSON.parse(stringifiedData)
-					console.log('data after json parse', requestJSON);
-					console.log('printing base64image after parse', requestJSON.image)
-					axios.post(
-					'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/extra', stringifiedData)
-					.then(res => {
-						console.log('update extra request response',res)
-						setState({
-							...State, 
-							CurrentExtra:res.data.content,
-							CurrentAlert: {
-								...State.CurrentAlert,
-								open: true, 
-								type: 'success', 
-								content: res.data.msg
-							}
-						});
-						navigate('/Extra/:' + data.pk);
-					})
-					.catch(err => {
-						console.log('printing update extra request error', err)
-						setState({
-							...State,
-								CurrentAlert: {
-									...State.CurrentAlert,
-									open: true, 
-									type: 'error', 
-									content: err.message
-						}});
-					})
-				}, 2000);
-				
 			},
 		});
 	

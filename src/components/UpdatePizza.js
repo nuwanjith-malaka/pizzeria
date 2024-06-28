@@ -51,6 +51,49 @@ const EditPizza = (props) => {
 		.required('Image is required'),
 	});
 
+	function sendEditPizzaRequest(data){
+		console.log('data before stringified', data);
+		const stringifiedData = JSON.stringify(data)
+		console.log('data after stringified', stringifiedData);
+		const requestJSON = JSON.parse(stringifiedData)
+		console.log('data after json parse', requestJSON);
+		console.log('printing base64image after parse', requestJSON.image)
+		axios.post(
+			'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/pizza', 
+			stringifiedData, 
+			{
+				headers: {
+				'Authorization': `Basic ${State.User.tokens.access_token}`,
+				}
+			}
+		)
+		.then(res => {
+			console.log('update pizza request response',res)
+			setState({
+				...State, 
+				CurrentPizza:res.data.content,
+				CurrentAlert: {
+					...State.CurrentAlert,
+					open: true, 
+					type: 'success', 
+					content: res.data.msg
+				}
+			});
+			navigate('/Pizza/:' + data.pk);
+		})
+		.catch(err => {
+			console.log('printing update pizza request error', err)
+			setState({
+				...State,
+					CurrentAlert: {
+						...State.CurrentAlert,
+						open: true, 
+						type: 'error', 
+						content: err.message
+			}});
+		})
+	}
+
 	const formik = useFormik({
 		initialValues: {
 			pk: State.CurrentPizza.pk,
@@ -111,6 +154,7 @@ const EditPizza = (props) => {
 					.then(res =>{
 						console.log('printing base64 image', res)
 						data['image'] = res
+						sendEditPizzaRequest(data)
 					})
 					.catch(err => {
 						console.log('printing base64 image error', err)
@@ -118,44 +162,8 @@ const EditPizza = (props) => {
 			}
 			else{
 				data.image = ""
+				sendEditPizzaRequest(data)
 			}
-			
-			setTimeout(()=>{
-				console.log('data before stringified', data);
-				const stringifiedData = JSON.stringify(data)
-				console.log('data after stringified', stringifiedData);
-				const requestJSON = JSON.parse(stringifiedData)
-				console.log('data after json parse', requestJSON);
-				console.log('printing base64image after parse', requestJSON.image)
-				axios.post(
-				'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/pizza', stringifiedData)
-				.then(res => {
-					console.log('update pizza request response',res)
-					setState({
-						...State, 
-						CurrentPizza:res.data.content,
-						CurrentAlert: {
-							...State.CurrentAlert,
-							open: true, 
-							type: 'success', 
-							content: res.data.msg
-						}
-					});
-					navigate('/Pizza/:' + data.pk);
-				})
-				.catch(err => {
-					console.log('printing update pizza request error', err)
-					setState({
-						...State,
-							CurrentAlert: {
-								...State.CurrentAlert,
-								open: true, 
-								type: 'error', 
-								content: err.message
-					}});
-				})
-			}, 2000);
-			
 		},
 	});
 

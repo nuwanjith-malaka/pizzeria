@@ -46,6 +46,49 @@ const CreatePizza = () => {
 		.required('Image is required'),
 	});
 
+	function SendCreatePizzaRequest(data){
+		console.log('data before stringified', data);
+		const stringifiedData = JSON.stringify(data)
+		console.log('data after stringified', stringifiedData);
+		const requestJSON = JSON.parse(stringifiedData)
+		console.log('data after json parse', requestJSON);
+		console.log('printing base64image after parse', requestJSON.image)
+		axios.post(
+			'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/pizza', 
+			stringifiedData, 
+			{
+				headers: {
+				'Authorization': `Basic ${State.User.tokens.access_token}`,
+				}
+			}
+		)
+		.then(res => {
+			console.log('update pizza request response',res)
+			setState({
+				...State, 
+				CurrentPizza:res.data.content,
+				CurrentAlert: {
+					...State.CurrentAlert,
+					open: true, 
+					type: 'success', 
+					content: res.data.msg
+				}
+			});
+			navigate('/Pizza/:' + data.pk);
+		})
+		.catch(err => {
+			console.log('printing update pizza request error', err)
+			setState({
+				...State,
+					CurrentAlert: {
+						...State.CurrentAlert,
+						open: true, 
+						type: 'error', 
+						content: err.message
+			}});
+		})
+	}
+
 	const formik = useFormik({
 		initialValues: {
 			pk:'',
@@ -88,64 +131,30 @@ const CreatePizza = () => {
 				image:values.file
 			  };
 			if (typeof values.file !== "string"){
-			console.log('printing image to be uploaded',values.file);
-			const readFile = new Promise((resolve, reject) => {
-				const reader = new FileReader();
-				reader.readAsBinaryString(values.file);
-				reader.onloadend = function() {
-					const base64Image = btoa(reader.result);
-					//let base64Image = dataURL.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
-					resolve(base64Image) 
-				}
-			})
-			readFile
-				.then(res =>{
-					console.log('printing base64 image', res)
-					data['image'] = res
+				console.log('printing image to be uploaded',values.file);
+				const readFile = new Promise((resolve, reject) => {
+					const reader = new FileReader();
+					reader.readAsBinaryString(values.file);
+					reader.onloadend = function() {
+						const base64Image = btoa(reader.result);
+						//let base64Image = dataURL.replace(/^data:image\/(png|jpg|jpeg);base64,/, "");
+						resolve(base64Image) 
+					}
 				})
-				.catch(err => {
-					console.log('printing base64 image error', err)
-				})
+				readFile
+					.then(res =>{
+						console.log('printing base64 image', res)
+						data['image'] = res
+						SendCreatePizzaRequest(data)
+					})
+					.catch(err => {
+						console.log('printing base64 image error', err)
+					})
 			}
 			else{
 				data.image = ""
+				SendCreatePizzaRequest(data)
 			}
-			setTimeout(()=>{
-				console.log('data before stringified', data);
-				const stringifiedData = JSON.stringify(data)
-				console.log('data after stringified', stringifiedData);
-				const requestJSON = JSON.parse(stringifiedData)
-				console.log('data after json parse', requestJSON);
-				console.log('printing base64image after parse', requestJSON.image)
-				axios.post(
-				'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/extra', stringifiedData)
-				.then(res => {
-					console.log('update extra request response',res)
-					setState({
-						...State, 
-						CurrentExtra:res.data.content,
-						CurrentAlert: {
-							...State.CurrentAlert,
-							open: true, 
-							type: 'success', 
-							content: res.data.msg
-						}
-					});
-					navigate('/Extra/:' + data.pk);
-				})
-				.catch(err => {
-					console.log('printing update extra request error', err)
-					setState({
-						...State,
-							CurrentAlert: {
-								...State.CurrentAlert,
-								open: true, 
-								type: 'error', 
-								content: err.message
-					}});
-				})
-			}, 2000);
-			
 		},
 	});
 	

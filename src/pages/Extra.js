@@ -29,7 +29,15 @@ const Extra = () => {
     const deleteExtra = () => {
         console.log("starting deleteExtra method ->" , Extra)
         axios
-        .delete("https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/extra", {params: {type:"item", item:"extra", pk:`${Extra.pk}`, sk:`${Extra.sk}`}})
+        .delete(
+          "https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/extra", 
+          {params: {type:"item", item:"extra", pk:`${Extra.pk}`, sk:`${Extra.sk}`}}, 
+          {
+            headers: {
+            'Authorization': `Basic ${State.User.tokens.access_token}`,
+            }
+          }
+        )
         .then((res) => {
             console.log("printing delete request response", res)
             setState(

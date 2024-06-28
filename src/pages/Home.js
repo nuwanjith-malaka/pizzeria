@@ -29,11 +29,11 @@ function Home() {
         console.log('sending axios get request to fetch extras')
         axios
           .get('https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/extra?type=list&item=extra')
-          .then(({ data }) => {
+          .then((res) => {
             //extras = data.content.Items
             //console.log('setting fetched extras to extras v', extras)
-            console.log('returning extras', data.content.Items)
-            resolve(data.content.Items)
+            console.log('returning extras', res.data.content.Items)
+            resolve(res.data.content.Items)
           })
           .catch((error) => {
               console.log('extras fetching request error', error);
@@ -46,11 +46,11 @@ function Home() {
         console.log('sending axios get request to fetch pizzas')
         axios
         .get('https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/pizza?type=list&item=pizza')
-        .then(({ data }) => {
+        .then((res) => {
           //pizzas = data.content.Items
           //console.log('setting fetched pizzas to pizzas v',pizzas)
-          console.log('returning pizzas', data.content.Items)
-          resolve(data.content.Items)
+          console.log('returning pizzas', res.data.content.Items)
+          resolve(res.data.content.Items)
         })
         .catch((error) => {
           console.log('pizzas fetching request error', error);
@@ -99,9 +99,9 @@ function Home() {
               }
             }
           )
-          .then(({ data }) => {
-            console.log('printing getUserTokens response', data)
-            const tokens = data
+          .then((res) => {
+            console.log('printing getUserTokens response', res.data)
+            const tokens = res.data
             getUserInfo(tokens)
               .then((user)=>{
                  return resolve(user)
@@ -129,12 +129,12 @@ function Home() {
               }
             }
           )
-          .then(({ data }) => {
-            console.log('printing getUserInfo response', data)
+          .then((res) => {
+            console.log('printing getUserInfo response', res.data)
             resolve({
               isAuthenticated: true,
               tokens:tokens,
-              info:data
+              info:res.data
             })
           })
           .catch((error) => {

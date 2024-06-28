@@ -85,7 +85,15 @@ const Pizza = () => {
     const deletePizza = () => {
         console.log("starting deletePizza method ->" , Pizza)
         axios
-        .delete("https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/pizza", {params: {type:"item", item:"pizza", pk:`${Pizza.pk}`, sk:`${Pizza.sk}`}})
+        .delete(
+          "https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/pizza", 
+          {params: {type:"item", item:"pizza", pk:`${Pizza.pk}`, sk:`${Pizza.sk}`}}, 
+          {
+            headers: {
+            'Authorization': `Basic ${State.User.tokens.access_token}`,
+            }
+          }
+        )
         .then((res) => {
           console.log("printing delete request response", res)
             setState(
