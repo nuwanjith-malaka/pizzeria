@@ -91,6 +91,7 @@ const Pizza = () => {
           {
             headers: {
             'Authorization': `Basic ${State.User.tokens.access_token}`,
+            'Access-Control-Allow-Origin': '*'
             }
           }
         )

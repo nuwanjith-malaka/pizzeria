@@ -32,7 +32,7 @@ function Home() {
           .then((res) => {
             //extras = data.content.Items
             //console.log('setting fetched extras to extras v', extras)
-            console.log('returning extras', res.data.content.Items)
+            console.log('returning extras', res)
             resolve(res.data.content.Items)
           })
           .catch((error) => {
@@ -49,7 +49,7 @@ function Home() {
         .then((res) => {
           //pizzas = data.content.Items
           //console.log('setting fetched pizzas to pizzas v',pizzas)
-          console.log('returning pizzas', res.data.content.Items)
+          console.log('returning pizzas', res)
           resolve(res.data.content.Items)
         })
         .catch((error) => {
@@ -100,7 +100,7 @@ function Home() {
             }
           )
           .then((res) => {
-            console.log('printing getUserTokens response', res.data)
+            console.log('printing getUserTokens response', res)
             const tokens = res.data
             getUserInfo(tokens)
               .then((user)=>{
@@ -130,7 +130,7 @@ function Home() {
             }
           )
           .then((res) => {
-            console.log('printing getUserInfo response', res.data)
+            console.log('printing getUserInfo response', res)
             resolve({
               isAuthenticated: true,
               tokens:tokens,
