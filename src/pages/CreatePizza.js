@@ -58,7 +58,8 @@ const CreatePizza = () => {
 			stringifiedData, 
 			{
 				headers: {
-				'Authorization': `Basic ${State.User.tokens.access_token}`,
+				'Authorization': `Bearer ${State.User.tokens.access_token}`,
+				'Access-Control-Allow-Origin': '*'
 				}
 			}
 		)

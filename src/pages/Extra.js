@@ -34,7 +34,7 @@ const Extra = () => {
           {params: {type:"item", item:"extra", pk:`${Extra.pk}`, sk:`${Extra.sk}`}}, 
           {
             headers: {
-            'Authorization': `Basic ${State.User.tokens.access_token}`,
+            'Authorization': `Bearer ${State.User.tokens.access_token}`,
             'Access-Control-Allow-Origin': '*'
             }
           }
