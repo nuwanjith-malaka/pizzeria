@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
 import { Link as RouterLink, MemoryRouter } from 'react-router-dom';
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 // TODO remove, this demo shouldn't need to reset the theme.
 
 export default function SignIn() {
