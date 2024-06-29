@@ -13,10 +13,14 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
 import { Link as RouterLink, MemoryRouter } from 'react-router-dom';
-
+import React, { useState, useEffect } from "react";
 // TODO remove, this demo shouldn't need to reset the theme.
 
 export default function SignIn() {
+  useEffect(()=>{
+    window.location.replace("https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/authorize?client_id=qgklh1tp03tvqav39sjaafct2&response_type=code&redirect_uri=https%3A%2F%2Fpizzzzeria.com&state=abcdefg")
+  })
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);

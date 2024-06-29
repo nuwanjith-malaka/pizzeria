@@ -12,6 +12,7 @@ import Cart from "../components/Cart";
 
 import * as qs from 'qs'
 import { useLocation } from 'react-router-dom';
+import SignIn from "./SignIn";
   
 function Home() {
 
@@ -28,7 +29,15 @@ function Home() {
       return new Promise((resolve, reject)=>{
         console.log('sending axios get request to fetch extras')
         axios
-          .get('https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/extra?type=list&item=extra')
+          .get(
+            'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/extra?type=list&item=extra',
+            {
+              headers: {
+              'Authorization': `Bearer ${State.User.tokens.access_token}`,
+              'Access-Control-Allow-Origin': '*'
+              }
+            }
+          )
           .then((res) => {
             //extras = data.content.Items
             //console.log('setting fetched extras to extras v', extras)
@@ -45,7 +54,15 @@ function Home() {
       return new Promise((resolve, reject)=>{
         console.log('sending axios get request to fetch pizzas')
         axios
-        .get('https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/pizza?type=list&item=pizza')
+        .get(
+          'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/pizza?type=list&item=pizza',
+          {
+            headers: {
+            'Authorization': `Bearer ${State.User.tokens.access_token}`,
+            'Access-Control-Allow-Origin': '*'
+            }
+          }
+        )
         .then((res) => {
           //pizzas = data.content.Items
           //console.log('setting fetched pizzas to pizzas v',pizzas)
@@ -104,8 +121,29 @@ function Home() {
             const tokens = res.data
             getUserInfo(tokens)
               .then((user)=>{
-                 return resolve(user)
+                getPizzas()
+                  .then((pizzas) =>{
+                    getExtras()
+                      .then((extras)=>{
+                        return resolve(
+                          {
+                            user:user,
+                            pizzas:pizzas,
+                            extras:extras
+                          }
+                        )
+                      })
+                      .catch((err)=>{
+                        console.log('getextras error', err)
+                      });
+                  })
+                  .catch((err)=>{
+                    console.log('getpizzas error', err)
+                  });
               })
+              .catch((err)=>{
+                console.log('getuserinfo error', err)
+              });
           })
           .catch((error) => {
             console.log('printing getUserTokens request error', error);
@@ -143,26 +181,29 @@ function Home() {
       })
     }
     
-    Promise.all([getPizzas(), getExtras(), getUserTokens()])
-      .then(([pizzas, extras, user]) => {
+    getUserTokens()
+      .then((result) => {
         console.log('adding pizzas and extras to the state')
         setState({
           ...State, 
-          Extras:extras, 
-          Pizzas:pizzas, 
-          User:user
+          Extras:result.extras, 
+          Pizzas:result.pizzas, 
+          User:result.user
           });
-        console.log('printing state',State)
+        
       })
       .catch((err)=>{
-        console.log('promise all error', err)
+        console.log('getusertokens error', err)
       });
-
+    console.log('printing state',State)
     
   }, []);
-  return (
-        <PizzaList></PizzaList>
-     );
+  if (State.User.isAuthenticated){
+    return (
+    <PizzaList></PizzaList>
+  );
+  }
+  return <SignIn></SignIn>
 }
 
 export default Home;
