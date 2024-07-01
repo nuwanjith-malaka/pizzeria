@@ -112,7 +112,7 @@ function Home() {
       })
     }
     
-    function getExtras(){
+    function getExtras(tokens){
       return new Promise((resolve, reject)=>{
         console.log('sending axios get request to fetch extras')
         axios
@@ -137,7 +137,7 @@ function Home() {
       })
     }
 
-    function getPizzas(){
+    function getPizzas(tokens){
       return new Promise((resolve, reject)=>{
         console.log('sending axios get request to fetch pizzas')
         axios
