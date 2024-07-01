@@ -52,9 +52,9 @@ function Home() {
             const tokens = res.data
             getUserInfo(tokens)
               .then((user)=>{
-                getPizzas()
+                getPizzas(tokens)
                   .then((pizzas) =>{
-                    getExtras()
+                    getExtras(tokens)
                       .then((extras)=>{
                         return resolve(
                           {
@@ -120,7 +120,7 @@ function Home() {
             'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/extra?type=list&item=extra',
             {
               headers: {
-              'Authorization': `Bearer ${State.User.tokens.access_token}`,
+              'Authorization': `Bearer ${tokens.access_token}`,
               'Access-Control-Allow-Origin': '*'
               }
             }
@@ -145,7 +145,7 @@ function Home() {
           'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/pizza?type=list&item=pizza',
           {
             headers: {
-            'Authorization': `Bearer ${State.User.tokens.access_token}`,
+            'Authorization': `Bearer ${tokens.access_token}`,
             'Access-Control-Allow-Origin': '*'
             }
           }
@@ -182,13 +182,17 @@ function Home() {
           Extras:result.extras, 
           Pizzas:result.pizzas, 
           User:result.user
-          });
+          }, 
+          ()=>{
+            console.log('printing state',State)
+          }
+        );
         
       })
       .catch((err)=>{
         console.log('getusertokens error', err)
       });
-    console.log('printing state',State)
+    
     
   }, []);
     return (
