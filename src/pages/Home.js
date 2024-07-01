@@ -12,7 +12,6 @@ import Cart from "../components/Cart";
 
 import * as qs from 'qs'
 import { useLocation } from 'react-router-dom';
-import SignIn from "./SignIn";
   
 function Home() {
 
@@ -23,78 +22,10 @@ function Home() {
 
     //let pizzas = []
     //let extras = []
-    console.log('latest deployment => 16:00')
 
-    function getExtras(){
-      return new Promise((resolve, reject)=>{
-        console.log('sending axios get request to fetch extras')
-        axios
-          .get(
-            'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/extra?type=list&item=extra',
-            {
-              headers: {
-              'Authorization': `Bearer ${State.User.tokens.access_token}`,
-              'Access-Control-Allow-Origin': '*'
-              }
-            }
-          )
-          .then((res) => {
-            //extras = data.content.Items
-            //console.log('setting fetched extras to extras v', extras)
-            console.log('returning extras', res)
-            resolve(res.data.content.Items)
-          })
-          .catch((error) => {
-              console.log('extras fetching request error', error);
-          });
-      })
-    }
-
-    function getPizzas(){
-      return new Promise((resolve, reject)=>{
-        console.log('sending axios get request to fetch pizzas')
-        axios
-        .get(
-          'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/pizza?type=list&item=pizza',
-          {
-            headers: {
-            'Authorization': `Bearer ${State.User.tokens.access_token}`,
-            'Access-Control-Allow-Origin': '*'
-            }
-          }
-        )
-        .then((res) => {
-          //pizzas = data.content.Items
-          //console.log('setting fetched pizzas to pizzas v',pizzas)
-          console.log('returning pizzas', res)
-          resolve(res.data.content.Items)
-        })
-        .catch((error) => {
-          console.log('pizzas fetching request error', error);
-        });
-      })
-    }
-
-    function getUserTokens(){
+    function getUserTokens(authorizationCode){
       console.log('started getUserTokens')
-      let authorizationCode = ''
-      const queryParams = new URLSearchParams(window.location.search);
-      console.log('printing URLSearchParams', queryParams)
 
-      if (queryParams.has('code')){
-          authorizationCode = queryParams.get('code'); 
-          console.log("authorization code", authorizationCode)
-      }
-      else {
-        return new Promise((resolve)=>{
-          console.log("promise resolved with guest user")
-          resolve({
-            isAuthenticated: false,
-            tokens:{},
-            info:{}
-          })
-        })
-      }
       
       return new Promise((resolve) => {
         console.log("sending axios request ot token endpoint")
@@ -181,7 +112,69 @@ function Home() {
       })
     }
     
-    getUserTokens()
+    function getExtras(){
+      return new Promise((resolve, reject)=>{
+        console.log('sending axios get request to fetch extras')
+        axios
+          .get(
+            'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/extra?type=list&item=extra',
+            {
+              headers: {
+              'Authorization': `Bearer ${State.User.tokens.access_token}`,
+              'Access-Control-Allow-Origin': '*'
+              }
+            }
+          )
+          .then((res) => {
+            //extras = data.content.Items
+            //console.log('setting fetched extras to extras v', extras)
+            console.log('returning extras', res)
+            resolve(res.data.content.Items)
+          })
+          .catch((error) => {
+              console.log('extras fetching request error', error);
+          });
+      })
+    }
+
+    function getPizzas(){
+      return new Promise((resolve, reject)=>{
+        console.log('sending axios get request to fetch pizzas')
+        axios
+        .get(
+          'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/pizza?type=list&item=pizza',
+          {
+            headers: {
+            'Authorization': `Bearer ${State.User.tokens.access_token}`,
+            'Access-Control-Allow-Origin': '*'
+            }
+          }
+        )
+        .then((res) => {
+          //pizzas = data.content.Items
+          //console.log('setting fetched pizzas to pizzas v',pizzas)
+          console.log('returning pizzas', res)
+          resolve(res.data.content.Items)
+        })
+        .catch((error) => {
+          console.log('pizzas fetching request error', error);
+        });
+      })
+    }
+
+    let authorizationCode = ''
+      const queryParams = new URLSearchParams(window.location.search);
+      console.log('printing URLSearchParams', queryParams)
+
+      if (queryParams.has('code')){
+          authorizationCode = queryParams.get('code'); 
+          console.log("authorization code", authorizationCode)
+      }
+      else {
+        window.location.replace("https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/authorize?client_id=qgklh1tp03tvqav39sjaafct2&response_type=code&redirect_uri=https%3A%2F%2Fpizzzzeria.com&state=abcdefg")
+      }
+
+    getUserTokens(authorizationCode)
       .then((result) => {
         console.log('adding pizzas and extras to the state')
         setState({
@@ -198,13 +191,10 @@ function Home() {
     console.log('printing state',State)
     
   }, []);
-  if (State.User.isAuthenticated){
     return (
     <PizzaList></PizzaList>
   );
-  }
-  return <SignIn></SignIn>
-}
+};
 
 export default Home;
 

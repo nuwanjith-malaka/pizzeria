@@ -2,8 +2,6 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "./pages/Home";
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
 import Pizza from "./pages/Pizza";
 import Extra from "./pages/Extra";
 import ListPizza from "./pages/ListPizza";
@@ -68,8 +66,6 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Home />} />
-                        <Route path="SignIn" element={<SignIn />} />
-                        <Route path="SignUp" element={<SignUp />} />
                         <Route path="Pizza" element={<ListPizza />} />
                         <Route path="Extra" element={<ListExtra />} />
                         <Route path="Create Pizza" element={<CreatePizza />} />
