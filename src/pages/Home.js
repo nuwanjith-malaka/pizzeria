@@ -42,8 +42,7 @@ function Home() {
             {
               headers: {
                 'Authorization': 'Basic cWdrbGgxdHAwM3R2cWF2MzlzamFhZmN0MjoxYXJybDA3dTdpYmI0Y3I4dmxvN3N0ZW50cm00Z2k5NmNoZmsxb2g1NDRtYXF2amxhMXI2',
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Access-Control-Allow-Origin': '*'
+                'Content-Type': 'application/x-www-form-urlencoded'
               }
             }
           )
@@ -64,21 +63,9 @@ function Home() {
                           }
                         )
                       })
-                      .catch((err)=>{
-                        console.log('getextras error', err)
-                      });
                   })
-                  .catch((err)=>{
-                    console.log('getpizzas error', err)
-                  });
               })
-              .catch((err)=>{
-                console.log('getuserinfo error', err)
-              });
           })
-          .catch((error) => {
-            console.log('printing getUserTokens request error', error);
-          });
       })
     }
 
@@ -93,8 +80,7 @@ function Home() {
             {
               headers: {
                 'Authorization': `Bearer ${tokens.access_token}`,
-                'Content-Type': 'application/x-amz-json-1.1',
-                'Access-Control-Allow-Origin': '*'
+                'Content-Type': 'application/x-amz-json-1.1'
               }
             }
           )
@@ -120,8 +106,7 @@ function Home() {
             'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/extra?type=list&item=extra',
             {
               headers: {
-              'Authorization': `Bearer ${tokens.access_token}`,
-              'Access-Control-Allow-Origin': '*'
+              'Authorization': `Bearer ${tokens.access_token}`
               }
             }
           )
@@ -145,8 +130,7 @@ function Home() {
           'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/pizza?type=list&item=pizza',
           {
             headers: {
-            'Authorization': `Bearer ${tokens.access_token}`,
-            'Access-Control-Allow-Origin': '*'
+            'Authorization': `Bearer ${tokens.access_token}`
             }
           }
         )
@@ -169,31 +153,29 @@ function Home() {
       if (queryParams.has('code')){
           authorizationCode = queryParams.get('code'); 
           console.log("authorization code", authorizationCode)
+
+          getUserTokens(authorizationCode)
+          .then((result) => {
+            console.log('adding pizzas and extras to the state')
+            setState({
+              ...State, 
+              Extras:result.extras, 
+              Pizzas:result.pizzas, 
+              User:result.user
+              }, 
+              ()=>{
+                console.log('printing state',State)
+              }
+            );
+            
+          })
+          .catch((err)=>{
+            console.log('getusertokens error', err)
+          });
       }
       else {
         window.location.replace("https://pizzzzeria.auth.us-east-1.amazoncognito.com/oauth2/authorize?client_id=qgklh1tp03tvqav39sjaafct2&response_type=code&redirect_uri=https%3A%2F%2Fpizzzzeria.com&state=abcdefg")
       }
-
-    getUserTokens(authorizationCode)
-      .then((result) => {
-        console.log('adding pizzas and extras to the state')
-        setState({
-          ...State, 
-          Extras:result.extras, 
-          Pizzas:result.pizzas, 
-          User:result.user
-          }, 
-          ()=>{
-            console.log('printing state',State)
-          }
-        );
-        
-      })
-      .catch((err)=>{
-        console.log('getusertokens error', err)
-      });
-    
-    
   }, []);
     return (
     <PizzaList></PizzaList>

@@ -55,8 +55,7 @@ const CreateExtra = () => {
 				stringifiedData, 
 				{
 					headers: {
-					'Authorization': `Bearer ${State.User.tokens.access_token}`,
-					'Access-Control-Allow-Origin': '*'
+					'Authorization': `Bearer ${State.User.tokens.access_token}`
 					}
 				}
 			)

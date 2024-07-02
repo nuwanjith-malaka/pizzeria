@@ -90,8 +90,7 @@ const Pizza = () => {
           {params: {type:"item", item:"pizza", pk:`${Pizza.pk}`, sk:`${Pizza.sk}`}}, 
           {
             headers: {
-            'Authorization': `Bearer ${State.User.tokens.access_token}`,
-            'Access-Control-Allow-Origin': '*'
+            'Authorization': `Bearer ${State.User.tokens.access_token}`
             }
           }
         )

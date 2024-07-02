@@ -59,7 +59,6 @@ const CreatePizza = () => {
 			{
 				headers: {
 				'Authorization': `Bearer ${State.User.tokens.access_token}`,
-				'Access-Control-Allow-Origin': '*'
 				}
 			}
 		)
