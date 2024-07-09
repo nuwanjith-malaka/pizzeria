@@ -61,11 +61,6 @@ const EditPizza = (props) => {
 		axios.post(
 			'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/pizza', 
 			stringifiedData, 
-			{
-				headers: {
-				'Authorization': `Bearer ${State.User.tokens.access_token}`
-				}
-			}
 		)
 		.then(res => {
 			console.log('update pizza request response',res)
