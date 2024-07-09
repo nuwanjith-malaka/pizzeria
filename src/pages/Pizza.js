@@ -88,11 +88,6 @@ const Pizza = () => {
         .delete(
           "https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/pizza", 
           {params: {type:"item", item:"pizza", pk:`${Pizza.pk}`, sk:`${Pizza.sk}`}}, 
-          {
-            headers: {
-            'Authorization': `Bearer ${State.User.tokens.access_token}`
-            }
-          }
         )
         .then((res) => {
           console.log("printing delete request response", res)

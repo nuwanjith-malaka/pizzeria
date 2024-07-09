@@ -136,7 +136,7 @@ function Home() {
       })
     }
 
-    console.log('deployement 17.06')
+    console.log('deployement 17.50')
     let authorizationCode = ''
       const queryParams = new URLSearchParams(window.location.search);
       console.log('printing URLSearchParams', queryParams)
