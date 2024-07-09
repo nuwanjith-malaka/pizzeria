@@ -103,12 +103,7 @@ function Home() {
         console.log('sending axios get request to fetch extras')
         axios
           .get(
-            'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/extra?type=list&item=extra',
-            {
-              headers: {
-              'Authorization': `Bearer ${tokens.id_token}`
-              }
-            }
+            'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/extra?type=list&item=extra'
           )
           .then((res) => {
             //extras = data.content.Items
@@ -141,7 +136,7 @@ function Home() {
       })
     }
 
-    console.log('deployement 16.50')
+    console.log('deployement 16.57')
     let authorizationCode = ''
       const queryParams = new URLSearchParams(window.location.search);
       console.log('printing URLSearchParams', queryParams)
