@@ -127,12 +127,7 @@ function Home() {
         console.log('sending axios get request to fetch pizzas')
         axios
         .get(
-          'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/pizza?type=list&item=pizza',
-          {
-            headers: {
-            'Authorization': `Bearer ${tokens.id_token}`
-            }
-          }
+          'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/pizza?type=list&item=pizza'
         )
         .then((res) => {
           //pizzas = data.content.Items
@@ -146,6 +141,7 @@ function Home() {
       })
     }
 
+    console.log('deployement 16.50')
     let authorizationCode = ''
       const queryParams = new URLSearchParams(window.location.search);
       console.log('printing URLSearchParams', queryParams)
