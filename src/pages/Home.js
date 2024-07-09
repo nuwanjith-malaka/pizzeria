@@ -106,7 +106,7 @@ function Home() {
             'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/extra?type=list&item=extra',
             {
               headers: {
-              'Authorization': `Bearer ${tokens.access_token}`
+              'Authorization': `Bearer ${tokens.id_token}`
               }
             }
           )
@@ -130,7 +130,7 @@ function Home() {
           'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/pizza?type=list&item=pizza',
           {
             headers: {
-            'Authorization': `Bearer ${tokens.access_token}`
+            'Authorization': `Bearer ${tokens.id_token}`
             }
           }
         )
