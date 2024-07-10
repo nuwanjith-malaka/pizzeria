@@ -71,7 +71,7 @@ const CheckOut = () => {
         delivery_date:values.delivery_date,
         first_name:values.first_name,
         last_name:values.last_name,
-        Phone_number:values.Phone_number,
+        phone_number:values.Phone_number,
         email:values.email,
 			};
 			
