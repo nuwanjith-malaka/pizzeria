@@ -43,19 +43,30 @@ const CheckOut = () => {
 		.required('Email is required'),
 	});
 
+  const date = new Date();
+
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+
+  let currentDate = `${day}-${month}-${year}`;
+
 	const formik = useFormik({
 		initialValues: {
 			delivery_address:'',
-			delivery_date:'',
-			first_name:'',
-			last_name:'',
+			delivery_date:currentDate,
+			first_name:State.User.info.given_name,
+			last_name:State.User.info.family_name,
       Phone_number:'',
-			email:'',
+			email:State.User.info.email,
 		},
 		validationSchema: validationSchema,
 		onSubmit: (values) => {
 			console.log('starting useFormik onSubmit');
+      const pk = new Date().valueOf();
 			const data = {
+        pk:`o#${pk}`,
+        sk:`o#${pk}`,
 				delivery_address:values.delivery_address,
         delivery_date:values.delivery_date,
         first_name:values.first_name,
@@ -69,33 +80,31 @@ const CheckOut = () => {
             console.log('data after stringified', stringifiedData);
             const requestJSON = JSON.parse(stringifiedData)
             console.log('data after json parse', requestJSON);
-            // axios.post(
-            // 'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/extra', stringifiedData)
-            // .then(res => {
-            //     console.log('update extra request response',res)
-            //     setState({
-            //         ...State, 
-            //         CurrentExtra:res.data.content,
-            //         CurrentAlert: {
-            //             ...State.CurrentAlert,
-            //             open: true, 
-            //             type: 'success', 
-            //             content: res.data.msg
-            //         }
-            //     });
-            //     navigate('/Extra/:' + data.pk);
-            // })
-            // .catch(err => {
-            //     console.log('printing update extra request error', err)
-            //     setState({
-            //         ...State,
-            //             CurrentAlert: {
-            //                 ...State.CurrentAlert,
-            //                 open: true, 
-            //                 type: 'error', 
-            //                 content: err.message
-            //     }});
-            // })
+            axios.post(
+            'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/order', stringifiedData)
+            .then(res => {
+                console.log('create order request response',res)
+                setState({
+                    ...State, 
+                    CurrentAlert: {
+                        ...State.CurrentAlert,
+                        open: true, 
+                        type: 'success', 
+                        content: res.data.msg
+                    }
+                });
+            })
+            .catch(err => {
+                console.log('printing create order request error', err)
+                setState({
+                    ...State,
+                        CurrentAlert: {
+                            ...State.CurrentAlert,
+                            open: true, 
+                            type: 'error', 
+                            content: err.message
+                }});
+            })
 			
 		},
 	});
