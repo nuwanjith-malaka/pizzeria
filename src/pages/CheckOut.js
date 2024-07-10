@@ -67,8 +67,9 @@ const CheckOut = () => {
 			const data = {
         pk:`o#${pk}`,
         sk:`o#${pk}`,
-        GSI1PK: 'order',
-				GSI1SK: `o#${pk}`,
+        'entity type': 'order',
+        GSI1PK:'order',
+				GSI1SK:`o#${pk}`,
 				delivery_address:values.delivery_address,
         delivery_date:values.delivery_date,
         first_name:values.first_name,
