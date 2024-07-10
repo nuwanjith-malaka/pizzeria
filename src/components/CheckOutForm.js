@@ -104,7 +104,7 @@ export default function CheckOutForm(props) {
                   component={RouterLink} 
                   to={"/OrderSuccess"} 
               >
-              Place Order
+              {props.children}
               </Button>
             </Box> 
           </Box>

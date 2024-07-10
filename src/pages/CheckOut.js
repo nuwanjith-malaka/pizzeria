@@ -73,38 +73,39 @@ const CheckOut = () => {
         last_name:values.last_name,
         Phone_number:values.Phone_number,
         email:values.email,
-			  };
+			};
 			
-            console.log('data before stringified', data);
-            const stringifiedData = JSON.stringify(data)
-            console.log('data after stringified', stringifiedData);
-            const requestJSON = JSON.parse(stringifiedData)
-            console.log('data after json parse', requestJSON);
-            axios.post(
-            'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/order', stringifiedData)
-            .then(res => {
-                console.log('create order request response',res)
-                setState({
-                    ...State, 
-                    CurrentAlert: {
-                        ...State.CurrentAlert,
-                        open: true, 
-                        type: 'success', 
-                        content: res.data.msg
-                    }
-                });
-            })
-            .catch(err => {
-                console.log('printing create order request error', err)
-                setState({
-                    ...State,
-                        CurrentAlert: {
-                            ...State.CurrentAlert,
-                            open: true, 
-                            type: 'error', 
-                            content: err.message
-                }});
-            })
+      console.log('data before stringified', data);
+      const stringifiedData = JSON.stringify(data)
+      console.log('data after stringified', stringifiedData);
+      const requestJSON = JSON.parse(stringifiedData)
+      console.log('data after json parse', requestJSON);
+      axios.post(
+      'https://8cs5hz9ybb.execute-api.us-east-1.amazonaws.com/beta/order', stringifiedData)
+      .then(res => {
+          console.log('create order request response',res)
+          setState({
+              ...State, 
+              CurrentAlert: {
+                  ...State.CurrentAlert,
+                  open: true, 
+                  type: 'success', 
+                  content: res.data.msg
+              }
+          });
+          navigate('/OrderSuccess');
+      })
+      .catch(err => {
+          console.log('printing create order request error', err)
+          setState({
+              ...State,
+                  CurrentAlert: {
+                      ...State.CurrentAlert,
+                      open: true, 
+                      type: 'error', 
+                      content: err.message
+          }});
+      })
 			
 		},
 	});
@@ -116,7 +117,9 @@ const CheckOut = () => {
         </Typography>
         <CheckOutForm 
           formik={formik}
-        ></CheckOutForm>
+        >
+          Place Order
+        </CheckOutForm>
       </Container>
     )
 };
