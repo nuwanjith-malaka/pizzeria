@@ -99,12 +99,10 @@ export default function CheckOutForm(props) {
               Continue Shopping
               </Button>
               <Button 
-                  type="submit"
-                  variant="contained"
-                  component={RouterLink} 
-                  to={"/OrderSuccess"} 
+                type="submit"
+                variant="contained"
               >
-              {props.children}
+                {props.children}
               </Button>
             </Box> 
           </Box>
