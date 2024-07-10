@@ -35,7 +35,7 @@ const CheckOut = () => {
 		last_name: yup
 		.string('Enter your last name')
 		.required('Last Name is required'),
-		Phone_number: yup
+		phone_number: yup
 		.number('Enter your phone number')
 		.required('Phone Number is required'),
 		email: yup
