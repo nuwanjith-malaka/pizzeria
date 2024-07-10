@@ -57,7 +57,7 @@ const CheckOut = () => {
 			delivery_date:currentDate,
 			first_name:State.User.info.given_name,
 			last_name:State.User.info.family_name,
-      Phone_number:'',
+      phone_number:'',
 			email:State.User.info.email,
 		},
 		validationSchema: validationSchema,
@@ -71,8 +71,9 @@ const CheckOut = () => {
         delivery_date:values.delivery_date,
         first_name:values.first_name,
         last_name:values.last_name,
-        phone_number:values.Phone_number,
+        phone_number:values.phone_number,
         email:values.email,
+        order:State.CartItems
 			};
 			
       console.log('data before stringified', data);
