@@ -96,25 +96,31 @@ const Extra = () => {
         <Typography color="text.secondary" variant="h5">
           ${Extra["starting price"]}
         </Typography>
-        <Box display="flex" justifyContent="space-between" marginTop={5}>
-          <Button
-          component={Link} 
-          to={"/edit-Extra/" + Extra.pk} 
-          variant="contained" 
-          color="primary"
-          sx={{marginRight:2}}
-        >
-          Edit
-        </Button>
-        <Button 
-            onClick={deleteExtra}
-            size="sm" 
-            variant="contained"
-            color="error"
-        >
-            Delete
-        </Button>
-        </Box>
+        {
+          (State.User.isAuthenticated && (State.User.info.email in ['nuwanjithm@gmail.com',]))
+          ?
+            <Box display="flex" justifyContent="space-between" marginTop={5}>
+            <Button
+              component={Link} 
+              to={"/edit-Extra/" + Extra.pk} 
+              variant="contained" 
+              color="primary"
+              sx={{marginRight:2}}
+            >
+              Edit
+            </Button>
+            <Button 
+                onClick={deleteExtra}
+                size="sm" 
+                variant="contained"
+                color="error"
+            >
+                Delete
+            </Button>
+            </Box>
+          :
+            <></>
+        }
         </Box>
     );
 };

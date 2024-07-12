@@ -113,7 +113,8 @@ function ResponsiveAppBar() {
             </Grid>
           </Grid>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {pages.filter(function(page){return (State.User.isAuthenticated && (State.User.info.email in ['nuwanjithm@gmail.com',])) || !(page in ['Create Pizza','Create Extra'])}).map((page) => (
+              
               <Button 
                 component={RouterLink} 
                 to={ "/" + page }

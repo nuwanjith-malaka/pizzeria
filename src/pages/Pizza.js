@@ -259,26 +259,32 @@ const Pizza = () => {
           <Typography color="text.secondary" variant="h5">
             ${Pizza["starting price"]}
           </Typography>
-          <Box display="flex" justifyContent="center" marginTop={5}>
-            <Button
-            component={Link} 
-            to={"/edit-Pizza/" + Pizza.pk} 
-            variant="contained" 
-            color="primary"
-            sx={{marginRight:2}}
-            >
-            Edit
-            </Button>
-            <Button 
-                onClick={deletePizza}
-                size="sm" 
-                variant="contained"
-                color="error"
-            >
-              Delete
-            </Button>
+          {
+            (State.User.isAuthenticated && (State.User.info.email in ['nuwanjithm@gmail.com',]))
+            ?
+              <Box display="flex" justifyContent="center" marginTop={5}>
+                <Button
+                component={Link} 
+                to={"/edit-Pizza/" + Pizza.pk} 
+                variant="contained" 
+                color="primary"
+                sx={{marginRight:2}}
+                >
+                Edit
+                </Button>
+                <Button 
+                    onClick={deletePizza}
+                    size="sm" 
+                    variant="contained"
+                    color="error"
+                >
+                  Delete
+                </Button>
+              </Box>
+            :
+            <></>
+          }
             <OnlyTwoExtraDialog></OnlyTwoExtraDialog>
-            </Box>
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={6} >
               <Accordion defaultExpanded>
