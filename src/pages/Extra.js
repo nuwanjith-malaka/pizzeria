@@ -97,7 +97,7 @@ const Extra = () => {
           ${Extra["starting price"]}
         </Typography>
         {
-          (State.User.isAuthenticated && (State.User.info.email in ['nuwanjithm@gmail.com',]))
+          (State.User.isAuthenticated && (['nuwanjithm@gmail.com',].includes(State.User.info.email)))
           ?
             <Box display="flex" justifyContent="space-between" marginTop={5}>
             <Button
