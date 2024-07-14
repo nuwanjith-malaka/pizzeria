@@ -12,6 +12,7 @@
     <h3>1. High Level Architecture.</h3>
     <h3>2. Low Level Architecture.</h3>
     <h3>Low Level Architecture</h3>
+    <p>Check below youtube video.</p>
     <a href="https://youtu.be/VrCyGTqENZg" target="_blank">
     <img src="https://img.youtube.com/vi/VrCyGTqENZg/hqdefault.jpg" alt="Watch the video" />
     </a>
