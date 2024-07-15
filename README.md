@@ -41,6 +41,11 @@
     <p>AWS Lambda is used to run code without provisioning or managing servers and run code on a high-availability compute infrastructure and perform all of the administration of the compute resources, including server and operating system maintenance, capacity provisioning and automatic scaling, and logging for this application. </p>
     <img src="https://malakas3.s3.amazonaws.com/pizzeria/pizzeriaImages/pizzeriaLambda@.png" />
     <img src="https://malakas3.s3.amazonaws.com/pizzeria/pizzeriaImages/pizzeriaLambda@2.png" />
+    <img src="https://malakas3.s3.amazonaws.com/pizzeria/pizzeriaImages/pizzeriaLambda@3.png" />
+    <img src="https://malakas3.s3.amazonaws.com/pizzeria/pizzeriaImages/pizzeriaLambda@4.png" />
+    <img src="https://malakas3.s3.amazonaws.com/pizzeria/pizzeriaImages/pizzeriaLambda@5.png" />
+    <img src="https://malakas3.s3.amazonaws.com/pizzeria/pizzeriaImages/pizzeriaLambda@6.png" />
+    <img src="https://malakas3.s3.amazonaws.com/pizzeria/pizzeriaImages/pizzeriaLambda@7.png" />
     <p>Amazon Route 53 is used as a highly available and scalable Domain Name System (DNS) web service to do domain registration, DNS routing, and health checking for this application. </p>
     <img src="https://malakas3.s3.amazonaws.com/pizzeria/pizzeriaImages/pizzeriaRoute53@.png" />
     <img src="https://malakas3.s3.amazonaws.com/pizzeria/pizzeriaImages/pizzeriaRoute53@2.png" />
