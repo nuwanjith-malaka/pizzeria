@@ -50,7 +50,7 @@
     <img src="https://malakas3.s3.amazonaws.com/pizzeria/pizzeriaImages/pizzeriaRoute53@.png" />
     <img src="https://malakas3.s3.amazonaws.com/pizzeria/pizzeriaImages/pizzeriaRoute53@2.png" />
     <img src="https://malakas3.s3.amazonaws.com/pizzeria/pizzeriaImages/pizzeriaRoute53@3.png" />
-    <p>Amazon S3 is used to host the fronted of this application.</p>
+    <p>Amazon S3 is used to host the fronted of this application and file upload.</p>
     <img src="https://malakas3.s3.amazonaws.com/pizzeria/pizzeriaImages/pizzeriaS3.png" />
     <p>AWS CodePipeline is used as a continuous delivery service to automate the steps required to release the application.</p>
     <img src="https://malakas3.s3.amazonaws.com/pizzeria/pizzeriaImages/pizzeriaCodePipeline@.png" />
