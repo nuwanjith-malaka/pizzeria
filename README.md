@@ -17,6 +17,7 @@
     <img src="https://img.youtube.com/vi/VrCyGTqENZg/hqdefault.jpg" alt="Watch the video" />
     </a>
     <h3>High Level Architecture</h3>
+    <img src="https://malakas3.s3.amazonaws.com/pizzeria/pizzeriaImages/pizzeriaAchitecture.png" />
     <p>AWS Certificate Manager (ACM) is used to provision, manage, and renew publicly trusted TLS certificates of this application on AWS. </p>
     <img src="https://malakas3.s3.amazonaws.com/pizzeria/pizzeriaImages/pizzeriaACM@.png" />
     <img src="https://malakas3.s3.amazonaws.com/pizzeria/pizzeriaImages/pizzeriaACM@2.png" />
